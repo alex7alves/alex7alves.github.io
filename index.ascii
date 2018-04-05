@@ -91,16 +91,30 @@ image::PDI/saidaContagem.png[saidaContagem.png]
 === Exercício 4.1 
 * Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa equalize.cpp. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza.
 
-Assumindo que as imagens serão em tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
+Nesse programa em especial optou-se por utilizar imagem em vez de capiturar o vídeo da câmera uma vez que esta realiza um auto-ajustamento tornando inviável a percepção do efeito que se é desejado. Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
 
 .Listagem 4 - Exercício 4.1
 ....
-include::PDI/Equalizar.cpp[]
+include::PDI/Equalizar_imagem.cpp[]
 ....
+
 
 Que produz a seguinte saída :
 
-	INSERIR VIDEO AQUI
+
+.Imagem original.
+image::PDI/original.jpg[original.jpg]
+
+.Imagem equalizada.
+image::PDI/equalizado.jpg[equalizado.jpg]
+
+
+Contudo, caso queira trabalhar com a câmera e não se tendo o problema do auto-ajuste, pode-se usar o código apresentado na listagem 4.1.
+
+.Listagem 4.1 - Exercício 4.1 com câmera
+....
+include::PDI/Equalizar.cpp[]
+....
 
 === Exercício 4.2
 
@@ -137,3 +151,4 @@ Cujo resultado, para o filtro laplaciano do gaussiano é :
 .laplaciano do gaussiano.
 image::PDI/lapgauss.png[lapgauss.png]
 
+Onde a imagem da esquerda é o filtro do laplaciano do gaussiano e a da direita é a imagem de entrada.

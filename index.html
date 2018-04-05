@@ -817,10 +817,71 @@ void Bordas( Mat bolha, int passo_linha,int passo_coluna)
 </ul>
 </div>
 <div class="paragraph">
-<p>Assumindo que as imagens serão em tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :</p>
+<p>Nesse programa em especial optou-se por utilizar imagem em vez de capiturar o vídeo da câmera uma vez que esta realiza um auto-ajustamento tornando inviável a percepção do efeito que se é desejado. Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :</p>
 </div>
 <div class="literalblock">
 <div class="title">Listagem 4 - Exercício 4.1</div>
+<div class="content">
+<pre>/* Programa para equalizar o histograma
+   de uma imagem em tons de cinza
+
+   Autor : Alex Alves
+*/
+
+
+#include &lt;iostream&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char** argv){
+
+    Mat image,cinza,equalizar;
+    image = imread("img2.jpg");
+    VideoCapture cap;
+    bool uniform = true,acummulate = false;
+    int nbins = 256;
+    float range[] = {0, 256};
+    const float *histrange = { range };
+
+    cvtColor(image,cinza,CV_BGR2GRAY);
+
+    // Calculando o histograma para tons de cinzas
+    calcHist(&amp;cinza, 1, 0, Mat(),equalizar, 1,&amp;nbins, &amp;histrange,uniform,acummulate);
+
+    // Equalizando o histograma
+    equalizeHist(cinza,equalizar);
+    imshow("Cinza",cinza);
+    imshow("Equalizar",equalizar);
+    imwrite("original.jpg", cinza);
+    imwrite("equalizado.jpg",equalizar);
+    waitKey();
+
+    return 0;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Que produz a seguinte saída :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="PDI/original.jpg" alt="original.jpg">
+</div>
+<div class="title">Figure 6. Imagem original.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="PDI/equalizado.jpg" alt="equalizado.jpg">
+</div>
+<div class="title">Figure 7. Imagem equalizada.</div>
+</div>
+<div class="paragraph">
+<p>Contudo, caso queira trabalhar com a câmera e não se tendo o problema do auto-ajuste, pode-se usar o código apresentado na listagem 4.1.</p>
+</div>
+<div class="literalblock">
+<div class="title">Listagem 4.1 - Exercício 4.1 com câmera</div>
 <div class="content">
 <pre>/* Programa para equalizar o histograma
    de uma imagem em tons de cinza
@@ -870,14 +931,6 @@ int main(int argc, char** argv){
     }
     return 0;
 }</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Que produz a seguinte saída :</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>INSERIR VIDEO AQUI</pre>
 </div>
 </div>
 </div>
@@ -1149,7 +1202,10 @@ int main(int argvc, char** argv){
 <div class="content">
 <img src="PDI/lapgauss.png" alt="lapgauss.png">
 </div>
-<div class="title">Figure 6. laplaciano do gaussiano.</div>
+<div class="title">Figure 8. laplaciano do gaussiano.</div>
+</div>
+<div class="paragraph">
+<p>Onde a imagem da esquerda é o filtro do laplaciano do gaussiano e a da direita é a imagem de entrada.</p>
 </div>
 </div>
 </div>
@@ -1157,7 +1213,7 @@ int main(int argvc, char** argv){
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-04 21:29:29 BRT
+Last updated 2018-04-05 10:42:45 BRT
 </div>
 </div>
 </body>
