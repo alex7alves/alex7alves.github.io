@@ -1,5 +1,11 @@
+﻿
 = Processamento digital de imagem
-Autor : Alex Alves  [alex7alves10@hotmail.com].
+Alex Alves  <alex7alves10@hotmail.com>
+:toc-title: Sumário
+:toclevels: 2
+:toc: right
+:source-highlighter: pygments
+:pygments-style: fruity
 
 Os exercícios resolvidos aqui são as respostas para as questões propostas
 na disciplina de http://agostinhobritojr.github.io/tutoriais/pdi/[processamento de imagem digital].
@@ -10,7 +16,7 @@ na disciplina de http://agostinhobritojr.github.io/tutoriais/pdi/[processamento 
 == 2 Manipulando píxels em uma imagem
 
 === Exercício 2.1
-* Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa regions.cpp. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1P1 e P2P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos pontos P1P1 e P2P2 será exibida com o negativo da imagem na região correspondente. O efeito é ilustrado na Figura Regiões.
+* Utilizando o programa exemplos/pixels.cpp como referência, implemente  um  programa regions.cpp. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1P1 e P2P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos  pontos P1P1 e P2P2 será exibida com o negativo  da imagem na região correspondente. O efeito é ilustrado na Figura Regiões.
 
 A questão pede para implementar uma região para poder se gerar o negativo de no local na imagem. O negativo de uma imagem ( n(x,y)) pode ser compreendido como :
 
@@ -41,9 +47,10 @@ image::PDI/negativo.png[negativo.png]
 
 === Exercício 2.2
 
-*Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa trocaregioes.cpp. Seu programa deverá trocar os quadrantes em diagonal na imagem. Explore o uso da classe Mat e seus construtores para criar as regiões que serão trocadas. O efeito é ilustrado na Figura Troca de regiões.
+* Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa trocaregioes.cpp. Seu programa  deverá  trocar  os quadrantes em diagonal na imagem. Explore o uso da classe Mat e seus construtores para criar as regiões que serão trocadas. O efeito é ilustrado na Figura Troca de regiões.
 
 Utilizando a mesma imagem( biel.png) como entrada e fazendo o que se é proposto tem-se :
+:pygments-style: emacs
 [source,cpp]
 .Listagem 2 - Exercício 2.2
 ....
@@ -59,13 +66,13 @@ image::PDI/quadrantes.png[quadrantes.png]
 
 === Exercício 3.1
 
-*Observando-se o programa labeling.cpp como exemplo, é possível verificar que caso existam mais de 255 objetos na cena, o processo de rotulação poderá ficar comprometido. Identifique a situação em que isso ocorre e proponha uma solução para este problema.
+* Observando-se o programa labeling.cpp como exemplo, é possível verificar que caso existam mais de 255 objetos na cena, o processo de rotulação poderá ficar comprometido. Identifique a situação em que isso ocorre e proponha uma solução para este problema.
 
 O problema de rotular até 255 objetos se deve ao fato de se trabalhar com a escala de cinza onde se pode representar a intensidade até 255 e portanto se limita a esse número. Uma possível solução para aumentar o número de objetos rotulados seria trabalhar com matrizes de cores(RGB) e assim ir rotulando objetos a partir da combinações dessas 3 variações de cores gerando assim um conjunto maior de possibilidades de números de objetos que se pode rotular. 
 
 === Exercício 3.2
 
-*Aprimore o algoritmo de contagem apresentado para identificar regiões com ou sem buracos internos que existam na cena. Assuma que objetos com mais de um buraco podem existir. Inclua suporte no seu algoritmo para não contar bolhas que tocam as bordas da imagem. Não se pode presumir, a priori, que elas tenham buracos ou não.
+* Aprimore o algoritmo de contagem apresentado para identificar regiões com ou sem buracos internos que existam na cena. Assuma que objetos com mais de um buraco podem existir. Inclua suporte no seu algoritmo para não contar bolhas que tocam as bordas da imagem. Não se pode presumir, a priori, que elas tenham buracos ou não.
 
 De início é necessário fazer um pré-processamento na imagem com a ajuda do algoritmo floodFill especialmente para se retirar os objetos que tocam as bordas. A partir de então pode-se fazer o processo de contagem de objetos e de quantos deles tem buracos. No código aqui implementado optou-se por trabalhar não só para descobrir quantos objetos tem buracos ou não, mas sim quantos objetos tem buracos e, dos objetos que tem buracos, quantos buracos há nele para se obter um nível maior de precisão na contagem. Assim pde-se identificar se tem 3 objetos com 2 buracos, 2 objetos com 4 buracos e assim por diante. Por comodidade limitou-se a contar até 1- buracos internos.
 
@@ -77,6 +84,7 @@ image::PDI/bolhas2.png[bolhas2.png]
 Dessa maneira tem-se o código: 
 
 .Listagem 3 - Exercício 3.2
+[source,cpp]
 ....
 include::PDI/Contar_bolhas.cpp[]
 ....
@@ -94,6 +102,7 @@ image::PDI/saidaContagem.png[saidaContagem.png]
 Nesse programa em especial optou-se por utilizar imagem em vez de capiturar o vídeo da câmera uma vez que esta realiza um auto-ajustamento tornando inviável a percepção do efeito que se é desejado. Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
 
 .Listagem 4 - Exercício 4.1
+[source,cpp]
 ....
 include::PDI/Equalizar_imagem.cpp[]
 ....
@@ -112,6 +121,7 @@ image::PDI/equalizado.jpg[equalizado.jpg]
 Contudo, caso queira trabalhar com a câmera e não se tendo o problema do auto-ajuste, pode-se usar o código apresentado na listagem 4.1.
 
 .Listagem 4.1 - Exercício 4.1 com câmera
+[source,cpp]
 ....
 include::PDI/Equalizar.cpp[]
 ....
@@ -123,6 +133,7 @@ include::PDI/Equalizar.cpp[]
 A listagem 5 apresenta o que se pede.
 
 .Listagem 5 - Exercício 4.2
+[source,cpp]
 ....
 include::PDI/Detectar_movimento.cpp[]
 ....
@@ -142,6 +153,7 @@ Foi escolhido continuar com o modelo que se é utilizado no código dado e apena
 Na listagem 6 encontra-se a implementação.
 
 .Listagem 6 - Exercício 5
+[source,cpp]
 ....
 include::PDI/filtragem.cpp[]
 ....
