@@ -7,6 +7,7 @@ Alex Alves  <alex7alves10@hotmail.com>
 :source-highlighter: pygments
 :pygments-style: fruity
 
+
 Os exercícios resolvidos aqui são as respostas para as questões propostas
 na disciplina de http://agostinhobritojr.github.io/tutoriais/pdi/[processamento de imagem digital].
 
@@ -164,3 +165,37 @@ Cujo resultado, para o filtro laplaciano do gaussiano é :
 image::PDI/lapgauss.png[lapgauss.png]
 
 Onde a imagem da esquerda é o filtro do laplaciano do gaussiano e a da direita é a imagem de entrada.
+
+== 6 Tiltshift
+
+=== Exercício 6.1 
+* Utilizando o programa exemplos/addweighted.cpp como referência, implemente um programa tiltshift.cpp. Três ajustes deverão ser providos na tela da interface:
+
+    ** um ajuste para regular a altura da região central que entrará em foco;
+
+    ** um ajuste para regular a força de decaimento da região borrada;
+
+    ** um ajuste para regular a posição vertical do centro da região que entrará em foco. Finalizado o programa, a imagem produzida deverá ser salva em arquivo.
+
+
+Foi escolhido implementar o código de uma forma um pouco diferente, mas fazendo o que se foi pedido, do código original disponibilizado.
+
+Na implementação a seguir passa-se 3 parametro por meio do trackbar. Um é para produzir o nível de borramento e os outrros 2 são para definir o inicio e o fim da região em foco na cena. 
+
+A imagem a seguir foi utilizada como entrada.
+
+.Imagem de cidade.
+image::PDI/cidade.jpg[cidade.jpg]  
+
+Cuja saída é 
+
+.Tiltshift.
+image::PDI/tiltshiftcidade.png[tiltshiftcidade.png] 
+
+E a implementação pode ser vista na istagem 7.
+
+.Listagem 7 - Tiltshift em imagem
+[source,cpp]
+....
+include::PDI/tiltshiftImage.cpp[]
+....
