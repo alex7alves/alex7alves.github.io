@@ -1569,14 +1569,23 @@ Your browser does not support the video tag.
 
 <span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argvc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
   <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">borrar</span><span class="tok-p">,</span> <span class="tok-o">*</span><span class="tok-n">borrar_slider</span><span class="tok-p">,</span> <span class="tok-o">*</span><span class="tok-n">foco_inicio_slider</span><span class="tok-p">,</span><span class="tok-o">*</span><span class="tok-n">foco_fim_slider</span><span class="tok-p">;</span>
-  <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">borrado</span><span class="tok-p">;</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">borrado</span><span class="tok-p">,</span><span class="tok-n">matriz</span><span class="tok-p">;</span>
   <span class="tok-kt">int</span> <span class="tok-n">pegarQuadro</span> <span class="tok-o">=</span><span class="tok-mi">2</span><span class="tok-p">;</span> <span class="tok-c1">// usado para descartar os quadros</span>
-  <span class="tok-kt">bool</span> <span class="tok-n">inicio</span><span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-p">;</span>
-  <span class="tok-c1">//image = imread(argv[1]);</span>
-  <span class="tok-n">Mat</span> <span class="tok-n">matriz</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">type</span><span class="tok-p">());</span>
-  <span class="tok-n">VideoCapture</span> <span class="tok-n">cap</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]);</span>
+  <span class="tok-n">VideoCapture</span> <span class="tok-n">cap</span><span class="tok-p">(</span><span class="tok-s">&quot;Tutorial.mp4&quot;</span><span class="tok-p">);</span>
+   <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">isOpened</span><span class="tok-p">()){</span>
+      <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot; O video nao abriu</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">);</span>
+      <span class="tok-k">return</span> <span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
+
+   <span class="tok-p">}</span>
+
   <span class="tok-n">VideoWriter</span> <span class="tok-n">saida</span><span class="tok-p">;</span>
   <span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">open</span><span class="tok-p">(</span><span class="tok-s">&quot;Resultado.avi&quot;</span><span class="tok-p">,</span> <span class="tok-n">CV_FOURCC</span><span class="tok-p">(</span><span class="tok-sc">&#39;M&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;J&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;P&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;G&#39;</span><span class="tok-p">),</span> <span class="tok-mi">15</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-mi">640</span><span class="tok-p">,</span><span class="tok-mi">480</span><span class="tok-p">));</span>
+  <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">isOpened</span><span class="tok-p">()){</span>
+    <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot; O video nao grava</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">);</span>
+    <span class="tok-k">return</span> <span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
+
+  <span class="tok-p">}</span>
+
 
   <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">borrar</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">borrar_slider</span><span class="tok-p">);</span>
   <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">foco_inicio_slider</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">foco_fim_slider</span><span class="tok-p">);</span>
@@ -1592,10 +1601,7 @@ Your browser does not support the video tag.
 
   <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">){</span>
     <span class="tok-n">cap</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-n">image</span><span class="tok-p">;</span>
-    <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">inicio</span><span class="tok-p">){</span>
-      <span class="tok-n">Mat</span> <span class="tok-n">matriz</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">type</span><span class="tok-p">());</span>
-      <span class="tok-n">inicio</span> <span class="tok-o">=</span><span class="tok-nb">false</span><span class="tok-p">;</span>
-    <span class="tok-p">}</span>
+    <span class="tok-n">matriz</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">clone</span><span class="tok-p">();</span>
 
 
     <span class="tok-n">on_borrar</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">borrar_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
@@ -1612,9 +1618,10 @@ Your browser does not support the video tag.
     <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">pegarQuadro</span><span class="tok-o">==</span><span class="tok-mi">2</span><span class="tok-p">){</span>
        <span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-n">matriz</span><span class="tok-p">);</span>
        <span class="tok-n">pegarQuadro</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
+       <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Tiltshift&quot;</span><span class="tok-p">,</span><span class="tok-n">matriz</span><span class="tok-p">);</span>
     <span class="tok-p">}</span>
     <span class="tok-n">pegarQuadro</span><span class="tok-o">++</span><span class="tok-p">;</span>
-    <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Tiltshift&quot;</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">);</span>
+
     <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">20</span><span class="tok-p">)</span><span class="tok-o">==</span><span class="tok-mi">27</span><span class="tok-p">){</span>
 
       <span class="tok-k">break</span><span class="tok-p">;</span>

@@ -27,14 +27,23 @@ void on_fim(int, void*);
 
 int main(int argvc, char** argv){
   int *borrar, *borrar_slider, *foco_inicio_slider,*foco_fim_slider;
-  Mat image, borrado;
+  Mat image, borrado,matriz;
   int pegarQuadro =2; // usado para descartar os quadros
-  bool inicio=true;
-  //image = imread(argv[1]);
-  Mat matriz(image.rows,image.cols,image.type());
-  VideoCapture cap(argv[1]);
+  VideoCapture cap("Tutorial.mp4");
+   if(!cap.isOpened()){
+      printf(" O video nao abriu\n");
+      return -1;
+      
+   }
+        
   VideoWriter saida;
   saida.open("Resultado.avi", CV_FOURCC('M','J','P','G'), 15, Size(640,480));
+  if(!saida.isOpened()){
+    printf(" O video nao grava\n");
+    return -1;
+      
+  }
+  
 
   Alocar(&borrar,&borrar_slider);
   Alocar(&foco_inicio_slider,&foco_fim_slider);
@@ -50,10 +59,7 @@ int main(int argvc, char** argv){
   
   while(1){
     cap >> image;
-    if(inicio){
-      Mat matriz(image.rows,image.cols,image.type());
-      inicio =false;
-    }
+    matriz = image.clone();
     
 
     on_borrar(*borrar_slider, 0 );
@@ -70,9 +76,10 @@ int main(int argvc, char** argv){
     if(pegarQuadro==2){
        saida.write(matriz);
        pegarQuadro=0;
+       imshow("Tiltshift",matriz);
     }
     pegarQuadro++;
-    imshow("Tiltshift",image);
+    
     if(waitKey(20)==27){
       
       break;
