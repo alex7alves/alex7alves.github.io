@@ -3,9 +3,9 @@
 Alex Alves  <alex7alves10@hotmail.com>
 :toc-title: Sumário
 :toclevels: 2
-:toc: right
+:toc: left
 :source-highlighter: pygments
-:pygments-style: fruity
+:pygments-style: vim
 
 
 Os exercícios resolvidos aqui são as respostas para as questões propostas
@@ -216,3 +216,8 @@ A listagem 8 mostra o programa para realizar essa tarefa.
 ....
 include::PDI/tiltshiftVideo.cpp[]
 ....
+
+Foi usado um descarte de quadros no vídeo para deixá-lo com um modo um pouco acelerado, desta forma o tempo do vídeo se reduziu pela métade. Além disso foi usado regiões variadas de foco bem como intensidade do borramento, contudo , o trackbar não é captado no vídeo e por isso não á para visualizar as modifcações feitas nele mas  da para percebber os efeito que ele causa no vídeo ao modificá-lo. Dessa forma tem-se como resultado o vídeo a seguir.
+
+.Video com tiltshift.
+video::PDI/Resultado.mp4[Resultado.mp4] 

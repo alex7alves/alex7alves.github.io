@@ -28,26 +28,27 @@ void on_fim(int, void*);
 int main(int argvc, char** argv){
   int *borrar, *borrar_slider, *foco_inicio_slider,*foco_fim_slider;
   Mat image, borrado,matriz;
-  int pegarQuadro =2; // usado para descartar os quadros
+  int tirarQuadro =2; // usado acelerar os quadros
+  int cont=tirarQuadro;
   VideoCapture cap(argv[1]);
-   if(!cap.isOpened()){
-      printf(" O video nao abriu\n");
-      return -1;
+  if(!cap.isOpened()){
+    printf(" O video nao abriu\n");
+    return -1;
       
-   }
-        
-  VideoWriter saida;
-  saida.open("Resultado.avi", CV_FOURCC('M','J','P','G'), 15, Size(640,480));
+  }
+  int w  = cap.get(CV_CAP_PROP_FRAME_WIDTH);
+  int h = cap.get(CV_CAP_PROP_FRAME_HEIGHT);  
+  int frames = cap.get(CV_CAP_PROP_FPS);
+  
+  VideoWriter saida("Resultado.avi", CV_FOURCC('M','J','P','G'), frames, Size(w,h));
   if(!saida.isOpened()){
     printf(" O video nao grava\n");
     return -1;
       
   }
   
-
   Alocar(&borrar,&borrar_slider);
   Alocar(&foco_inicio_slider,&foco_fim_slider);
-
   setValores(borrar,borrar_slider,foco_inicio_slider,foco_fim_slider);
  
   namedWindow("Tiltshift", 1);
@@ -57,11 +58,13 @@ int main(int argvc, char** argv){
   createTrackbar( "Inicio ", "Tiltshift",foco_inicio_slider,610,on_inicio );
   createTrackbar( "Fim", "Tiltshift",foco_fim_slider,640,on_fim );
   
+  // Para inicializr 'matriz' nas mesmas propriedades do video
+  cap >> image; 
+  matriz = image.clone();
+
   while(1){
     cap >> image;
-    matriz = image.clone();
-    
-
+     
     on_borrar(*borrar_slider, 0 );
     on_inicio(*foco_inicio_slider, 0 );
     on_fim(*foco_fim_slider, 0 );
@@ -73,12 +76,16 @@ int main(int argvc, char** argv){
     }else{
       TiltShift(foco_fim_slider,foco_inicio_slider,image,borrado,matriz);
     }
-    if(pegarQuadro==2){
-       saida.write(matriz);
-       pegarQuadro=0;
+    
+    if(cont==tirarQuadro){
+       saida << matriz;
+       cont=0;
        imshow("Tiltshift",matriz);
     }
-    pegarQuadro++;
+    if(image.empty()){
+      break;
+    }
+    cont++;
     
     if(waitKey(20)==27){
       
@@ -88,8 +95,10 @@ int main(int argvc, char** argv){
   cap.release();
   saida.release();
   destroyAllWindows();
+  
   return 0;
 }
+
 void Alocar(int **x, int **x2){
   *x = new int;
   *x2 = new int;
