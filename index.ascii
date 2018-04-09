@@ -208,3 +208,11 @@ O vídeo utilizado como entrada para o programa foi
 
 .Video de cidade.
 video::PDI/VideoCidade[VideoCidade] 
+
+A listagem 8 mostra o programa para realizar essa tarefa.
+
+.Listagem 8 - Tiltshift em video
+[source,cpp]
+....
+include::PDI/tiltshiftVideo.cpp[]
+....
