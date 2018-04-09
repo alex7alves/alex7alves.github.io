@@ -5,7 +5,7 @@ Alex Alves  <alex7alves10@hotmail.com>
 :toclevels: 2
 :toc: left
 :source-highlighter: pygments
-:pygments-style: vim
+:pygments-style: native
 
 
 Os exercícios resolvidos aqui são as respostas para as questões propostas
@@ -139,9 +139,6 @@ A listagem 5 apresenta o que se pede.
 include::PDI/Detectar_movimento.cpp[]
 ....
 
-Que tem como resultado :
-
-	INSERIR VIDEO 2 AQUI
 
 
 == 5 Filtragem no domínio espacial I	
