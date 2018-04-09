@@ -29,7 +29,7 @@ int main(int argvc, char** argv){
   int *borrar, *borrar_slider, *foco_inicio_slider,*foco_fim_slider;
   Mat image, borrado,matriz;
   int pegarQuadro =2; // usado para descartar os quadros
-  VideoCapture cap("Tutorial.mp4");
+  VideoCapture cap(argv[1]);
    if(!cap.isOpened()){
       printf(" O video nao abriu\n");
       return -1;
