@@ -98,12 +98,12 @@ image::PDI/saidaContagem.png[saidaContagem.png]
 === Exercício 4.1 
 * Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa equalize.cpp. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza.
 
-Nesse programa em especial optou-se por utilizar imagem em vez de capiturar o vídeo da câmera uma vez que esta realiza um auto-ajustamento tornando inviável a percepção do efeito que se é desejado. Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
+Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
 
 .Listagem 4 - Exercício 4.1
 [source,cpp]
 ....
-include::PDI/Equalizar_imagem.cpp[]
+include::PDI/Equalizar.cpp[]
 ....
 
 
@@ -116,14 +116,11 @@ image::PDI/original.jpg[original.jpg]
 .Imagem equalizada.
 image::PDI/equalizado.jpg[equalizado.jpg]
 
+Uma  outra imagem com textos pode ser vista a seguir. A parte da esquerda é a imagem captada da câmera e a da direita é a imagem após realizar o histograma
 
-Contudo, caso queira trabalhar com a câmera e não se tendo o problema do auto-ajuste, pode-se usar o código apresentado na listagem 4.1.
+.Imagem de texto equalizado.
+image::PDI/Equalizar.png[Eqalizar.png]
 
-.Listagem 4.1 - Exercício 4.1 com câmera
-[source,cpp]
-....
-include::PDI/Equalizar.cpp[]
-....
 
 === Exercício 4.2
 
