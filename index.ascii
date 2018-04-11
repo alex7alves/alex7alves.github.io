@@ -214,5 +214,4 @@ include::PDI/tiltshiftVideo.cpp[]
 
 Foi usado um descarte de quadros no vídeo para deixá-lo com um modo um pouco acelerado, desta forma o tempo do vídeo se reduziu pela métade. Além disso foi usado regiões variadas de foco bem como intensidade do borramento, contudo , o trackbar não é captado no vídeo e por isso não á para visualizar as modifcações feitas nele mas  da para percebber os efeito que ele causa no vídeo ao modificá-lo. Dessa forma tem-se como resultado o vídeo a seguir.
 
-.Video com tiltshift.
-video::PDI/Resultado.avi[Resultado.avi] 
+O vídeo pode ser visto https://www.dropbox.com/s/xhf52mjsx8v8tus/Resultado.avi?dl=0[clicando aqui]
