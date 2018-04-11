@@ -32,7 +32,6 @@ int main(int argc, char** argv){
       
     width  = cap.get(CV_CAP_PROP_FRAME_WIDTH);
     height = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
-   // int frames = cap.get(CV_CAP_PROP_FPS);
   
     VideoWriter saida("Movimento.avi", CV_FOURCC('M','J','P','G'), 20, Size(width,height));
     if(!saida.isOpened()){
