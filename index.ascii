@@ -137,7 +137,7 @@ A listagem 5 apresenta o que se pede.
 include::PDI/Detectar_movimento.cpp[]
 ....
 
-
+Oonde o vídeo de saida do programa pode ser visto https://www.dropbox.com/s/jc3et6vcczymz14/Movimento.avi?dl=0[clicando aqui]
 
 == 5 Filtragem no domínio espacial I	
 

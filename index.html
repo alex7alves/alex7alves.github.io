@@ -1116,9 +1116,14 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 
     <span class="tok-n">width</span>  <span class="tok-o">=</span> <span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">(</span><span class="tok-n">CV_CAP_PROP_FRAME_WIDTH</span><span class="tok-p">);</span>
     <span class="tok-n">height</span> <span class="tok-o">=</span> <span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">(</span><span class="tok-n">CV_CAP_PROP_FRAME_HEIGHT</span><span class="tok-p">);</span>
+   <span class="tok-c1">// int frames = cap.get(CV_CAP_PROP_FPS);</span>
 
-    <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;largura = &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">width</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
-    <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;altura  = &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">height</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
+    <span class="tok-n">VideoWriter</span> <span class="tok-n">saida</span><span class="tok-p">(</span><span class="tok-s">&quot;Movimento.avi&quot;</span><span class="tok-p">,</span> <span class="tok-n">CV_FOURCC</span><span class="tok-p">(</span><span class="tok-sc">&#39;M&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;J&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;P&#39;</span><span class="tok-p">,</span><span class="tok-sc">&#39;G&#39;</span><span class="tok-p">),</span> <span class="tok-mi">20</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-n">width</span><span class="tok-p">,</span><span class="tok-n">height</span><span class="tok-p">));</span>
+    <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">isOpened</span><span class="tok-p">()){</span>
+        <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot; O video nao grava</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">);</span>
+        <span class="tok-k">return</span> <span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
+
+    <span class="tok-p">}</span>
 
     <span class="tok-kt">int</span> <span class="tok-n">histw</span> <span class="tok-o">=</span> <span class="tok-n">nbins</span><span class="tok-p">,</span> <span class="tok-n">histh</span> <span class="tok-o">=</span> <span class="tok-n">nbins</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">;</span>
     <span class="tok-n">Mat</span> <span class="tok-n">histImgG</span><span class="tok-p">(</span><span class="tok-n">histh</span><span class="tok-p">,</span> <span class="tok-n">histw</span><span class="tok-p">,</span> <span class="tok-n">CV_8UC3</span><span class="tok-p">,</span> <span class="tok-n">Scalar</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">));</span>
@@ -1135,7 +1140,7 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 
         <span class="tok-k">if</span><span class="tok-p">(</span> <span class="tok-n">histG2</span><span class="tok-p">.</span><span class="tok-n">data</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">compareHist</span><span class="tok-p">(</span><span class="tok-n">histG</span><span class="tok-p">,</span><span class="tok-n">histG2</span><span class="tok-p">,</span><span class="tok-n">CV_COMP_CHISQR</span><span class="tok-p">)</span><span class="tok-o">&gt;</span><span class="tok-mi">20</span><span class="tok-p">){</span>
             <span class="tok-c1">// Se houve movimento escreve mensagem na imagem</span>
-            <span class="tok-n">putText</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-s">&quot;Ocorreu um movimento !!!&quot;</span><span class="tok-p">,</span><span class="tok-n">cvPoint</span><span class="tok-p">(</span><span class="tok-mi">50</span><span class="tok-p">,</span><span class="tok-n">height</span><span class="tok-o">-</span><span class="tok-mi">20</span><span class="tok-p">),</span><span class="tok-n">FONT_HERSHEY_SCRIPT_COMPLEX</span><span class="tok-p">,</span>
+            <span class="tok-n">putText</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-s">&quot;Ocorreu um movimento !!!&quot;</span><span class="tok-p">,</span><span class="tok-n">cvPoint</span><span class="tok-p">(</span><span class="tok-mi">50</span><span class="tok-p">,</span><span class="tok-n">height</span><span class="tok-o">-</span><span class="tok-mi">80</span><span class="tok-p">),</span><span class="tok-n">FONT_HERSHEY_SCRIPT_COMPLEX</span><span class="tok-p">,</span>
                     <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-n">cvScalar</span><span class="tok-p">(</span><span class="tok-mi">255</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">20</span><span class="tok-p">),</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">8</span><span class="tok-p">);</span>
         <span class="tok-p">}</span>
 
@@ -1148,11 +1153,21 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
         <span class="tok-p">}</span>
         <span class="tok-n">histG2</span> <span class="tok-o">=</span><span class="tok-n">histG</span><span class="tok-p">.</span><span class="tok-n">clone</span><span class="tok-p">();</span>
         <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;image&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
-        <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">30</span><span class="tok-p">);</span>
+        <span class="tok-n">saida</span><span class="tok-o">&lt;&lt;</span> <span class="tok-n">image</span><span class="tok-p">;</span>
+        <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">)</span><span class="tok-o">==</span><span class="tok-mi">27</span><span class="tok-p">){</span>
+            <span class="tok-k">break</span><span class="tok-p">;</span>
+        <span class="tok-p">}</span>
+
     <span class="tok-p">}</span>
+    <span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">release</span><span class="tok-p">();</span>
+    <span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">release</span><span class="tok-p">();</span>
+    <span class="tok-n">destroyAllWindows</span><span class="tok-p">();</span>
     <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
 <span class="tok-p">}</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Oonde o vídeo de saida do programa pode ser visto <a href="https://www.dropbox.com/s/jc3et6vcczymz14/Movimento.avi?dl=0">clicando aqui</a></p>
 </div>
 </div>
 </div>
@@ -1690,7 +1705,7 @@ Your browser does not support the video tag.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 11:02:39 BRT
+Last updated 2018-04-11 11:36:54 BRT
 </div>
 </div>
 </body>

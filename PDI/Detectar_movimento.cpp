@@ -32,9 +32,14 @@ int main(int argc, char** argv){
       
     width  = cap.get(CV_CAP_PROP_FRAME_WIDTH);
     height = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
-
-    cout << "largura = " << width << endl;
-    cout << "altura  = " << height << endl;
+   // int frames = cap.get(CV_CAP_PROP_FPS);
+  
+    VideoWriter saida("Movimento.avi", CV_FOURCC('M','J','P','G'), 20, Size(width,height));
+    if(!saida.isOpened()){
+        printf(" O video nao grava\n");
+        return -1;
+          
+    }
 
     int histw = nbins, histh = nbins/2;
     Mat histImgG(histh, histw, CV_8UC3, Scalar(0,0,0));
@@ -51,7 +56,7 @@ int main(int argc, char** argv){
 
         if( histG2.data && compareHist(histG,histG2,CV_COMP_CHISQR)>20){
             // Se houve movimento escreve mensagem na imagem
-            putText(image,"Ocorreu um movimento !!!",cvPoint(50,height-20),FONT_HERSHEY_SCRIPT_COMPLEX,
+            putText(image,"Ocorreu um movimento !!!",cvPoint(50,height-80),FONT_HERSHEY_SCRIPT_COMPLEX,
                     1,cvScalar(255,0,20),1,8);
         }
            
@@ -64,7 +69,14 @@ int main(int argc, char** argv){
         }
         histG2 =histG.clone();
         imshow("image", image);
-        waitKey(30);
+        saida<< image;
+        if(waitKey(10)==27){
+            break;
+        }
+        
     }
+    cap.release();
+    saida.release();
+    destroyAllWindows();
     return 0;
 }
