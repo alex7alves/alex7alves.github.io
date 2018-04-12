@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-    Mat image,hR,hG,hB,saida,cinza,sr,sb,sg;
+    Mat image,saida;
     image = imread(argv[1]);
     vector<Mat> planes;
     split (image, planes);
