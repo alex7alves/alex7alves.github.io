@@ -228,3 +228,47 @@ include::PDI/tiltshiftVideo.cpp[]
 Foi usado um descarte de quadros no vídeo para deixá-lo com um modo um pouco acelerado, desta forma o tempo do vídeo se reduziu pela métade. Além disso foi usado regiões variadas de foco bem como intensidade do borramento, contudo , o trackbar não é captado no vídeo e por isso não á para visualizar as modifcações feitas nele mas  da para percebber os efeito que ele causa no vídeo ao modificá-lo. Dessa forma tem-se como resultado o vídeo a seguir.
 
 O vídeo pode ser visto https://www.dropbox.com/s/xhf52mjsx8v8tus/Resultado.avi?dl=0[clicando aqui]
+
+
+== Extras 
+
+Essa parte do site não está ligada a qualquer resolução de questão proposta na disciplina e não se relaciona com alguma atividade extra oriundas da disciplina. 
+
+Esta sessão é uma parte livre e destina-se a abrigar programas que se relacionam com o conteúdo visto no site. 
+
+=== Imagem em foco
+	
+O programa descrito na listagem extra 1 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
+
+.Listagem Extra 1 - Imagem em foco
+[source,cpp]
+....
+include::PDI/Foco.cpp[]
+....	
+
+São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.
+
+.Texto original.
+image::PDI/texto4.jpg[texto4.jpg]
+
+.Saída do programa.
+image::PDI/Foco.jpg[Foco.jpg]
+
+
+=== Imagem em foco com equalização
+	
+O programa descrito na listagem extra 2 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é feito a equalização do histograma e passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
+
+.Listagem Extra 2 - Imagem em foco equalizada
+[source,cpp]
+....
+include::PDI/Foco2.cpp[]
+....	
+
+São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.
+
+A imagem original é a mesma do anterior e a saida segue abaixo.
+
+
+.Saída do texto equalizado.
+image::PDI/Saida.jpg[Saida.jpg]
