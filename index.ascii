@@ -122,6 +122,22 @@ Uma  outra imagem com textos pode ser vista a seguir. A parte da esquerda é a i
 image::PDI/Equalizar.png[Eqalizar.png]
 
 
+Pode-se também trabalhar com equalização de imagens coloridas, contudo, como estas são formadas a partir de combinação de 3 cores( caso do RGB) pode ocorrer uma mudança na tonalidade em relação a imagem original. Se essa mudança será positiva ou negativa, vai depender da preferência de quem a esta manipulando. A listagem 4.1 mostra o programa que calcula a equalização em imagens coloridas.
+
+.Listagem 4.1 - Equalização de imagens coloridas
+[source,cpp]
+....
+include::PDI/Equalizar_colorido.cpp[]
+....
+
+Onde o resultado é mostrado abaixo. 
+
+.Imagem original.
+image::PDI/img2.jpg[img2.jpg]
+
+.Imagem colorida equalizada.
+image::PDI/equalizado2.jpg[equalizado2.jpg]
+
 === Exercício 4.2
 
 * Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa motiondetector.cpp. Este deverá continuamente calcular o histograma da imagem (apenas uma componente de cor é suficiente) e compará-lo com o último histograma calculado. Quando a diferença entre estes ultrapassar um limiar pré-estabelecido, ative um alarme. Utilize uma função de comparação que julgar conveniente. 
