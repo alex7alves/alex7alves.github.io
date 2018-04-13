@@ -252,7 +252,7 @@ São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fu
 image::PDI/texto4.jpg[texto4.jpg]
 
 .Saída do programa.
-image::PDI/Foco.jpg[Foco.jpg]
+image::PDI/Foco1.png[Foco1.png]
 
 
 === Imagem em foco com equalização
@@ -271,4 +271,4 @@ A imagem original é a mesma do anterior e a saida segue abaixo.
 
 
 .Saída do texto equalizado.
-image::PDI/Saida.jpg[Saida.jpg]
+image::PDI/foco2.png[foco2.png]
