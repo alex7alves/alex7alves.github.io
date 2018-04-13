@@ -28,9 +28,9 @@ int main(int argc, char** argv){
     fundo = imread(argv[2]);
     Mat matriz(image.rows,image.cols,image.type());
     float alfa=atoi(argv[3]);
-      
-    GaussianBlur(image,blur, Size(7,7),7);
-    addWeighted( image, 1-alfa, blur, alfa, 0.0,fim);
+    float gama = atoi(argv[4]);
+    GaussianBlur(image,blur, Size(3,3),5);
+    addWeighted( image,alfa, blur, 1-alfa, gama,fim);
 
     Alocar(&foco_inicio_slider,&foco_fim_slider);
 

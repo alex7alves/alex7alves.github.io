@@ -37,8 +37,9 @@ int main(int argc, char** argv){
     equalizeHist(planes[2],planes[2]);
     merge(planes,saida);
 
-    GaussianBlur(saida,blur, Size(7,7),7);
-    addWeighted( saida, 1-alfa, blur, alfa, 0.0,fim);
+    float gama = atoi(argv[4]);
+    GaussianBlur(saida,blur, Size(7,7),10);
+    addWeighted( saida,alfa, blur, 1-alfa, gama,fim);
 
     Alocar(&foco_inicio_slider,&foco_fim_slider);
 

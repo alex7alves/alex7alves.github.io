@@ -246,13 +246,13 @@ O programa descrito na listagem extra 1 a seguir mostra uma região de texto em 
 include::PDI/Foco.cpp[]
 ....	
 
-São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.
+São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.
 
-.Texto original.
-image::PDI/texto4.jpg[texto4.jpg]
+.Imagem  original.
+image::PDI/quadro.jpg[quadro.jpg]
 
 .Saída do programa.
-image::PDI/Foco1.png[Foco1.png]
+image::PDI/Foco.jpg[Foco.jpg]
 
 
 === Imagem em foco com equalização
@@ -265,9 +265,10 @@ O programa descrito na listagem extra 2 a seguir mostra uma região de texto em 
 include::PDI/Foco2.cpp[]
 ....	
 
-São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.
+São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.
 
-A imagem original é a mesma do anterior e a saida segue abaixo.
+.Texto original.
+image::PDI/texto4.jpg[texto4.jpg]
 
 
 .Saída do texto equalizado.

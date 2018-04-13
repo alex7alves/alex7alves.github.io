@@ -1764,9 +1764,9 @@ Your browser does not support the video tag.
     <span class="tok-n">fundo</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">]);</span>
     <span class="tok-n">Mat</span> <span class="tok-n">matriz</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">type</span><span class="tok-p">());</span>
     <span class="tok-kt">float</span> <span class="tok-n">alfa</span><span class="tok-o">=</span><span class="tok-n">atoi</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">3</span><span class="tok-p">]);</span>
-
-    <span class="tok-n">GaussianBlur</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-mi">7</span><span class="tok-p">,</span><span class="tok-mi">7</span><span class="tok-p">),</span><span class="tok-mi">7</span><span class="tok-p">);</span>
-    <span class="tok-n">addWeighted</span><span class="tok-p">(</span> <span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-n">fim</span><span class="tok-p">);</span>
+    <span class="tok-kt">float</span> <span class="tok-n">gama</span> <span class="tok-o">=</span> <span class="tok-n">atoi</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">4</span><span class="tok-p">]);</span>
+    <span class="tok-n">GaussianBlur</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">),</span><span class="tok-mi">5</span><span class="tok-p">);</span>
+    <span class="tok-n">addWeighted</span><span class="tok-p">(</span> <span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">gama</span><span class="tok-p">,</span><span class="tok-n">fim</span><span class="tok-p">);</span>
 
     <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">foco_inicio_slider</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">foco_fim_slider</span><span class="tok-p">);</span>
 
@@ -1830,17 +1830,17 @@ Your browser does not support the video tag.
 </div>
 </div>
 <div class="paragraph">
-<p>São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.</p>
+<p>São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="PDI/texto4.jpg" alt="texto4.jpg">
+<img src="PDI/quadro.jpg" alt="quadro.jpg">
 </div>
-<div class="title">Figure 14. Texto original.</div>
+<div class="title">Figure 14. Imagem  original.</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="PDI/Foco1.png" alt="Foco1.png">
+<img src="PDI/Foco.jpg" alt="Foco.jpg">
 </div>
 <div class="title">Figure 15. Saída do programa.</div>
 </div>
@@ -1892,8 +1892,9 @@ Your browser does not support the video tag.
     <span class="tok-n">equalizeHist</span><span class="tok-p">(</span><span class="tok-n">planes</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">],</span><span class="tok-n">planes</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">]);</span>
     <span class="tok-n">merge</span><span class="tok-p">(</span><span class="tok-n">planes</span><span class="tok-p">,</span><span class="tok-n">saida</span><span class="tok-p">);</span>
 
-    <span class="tok-n">GaussianBlur</span><span class="tok-p">(</span><span class="tok-n">saida</span><span class="tok-p">,</span><span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-mi">7</span><span class="tok-p">,</span><span class="tok-mi">7</span><span class="tok-p">),</span><span class="tok-mi">7</span><span class="tok-p">);</span>
-    <span class="tok-n">addWeighted</span><span class="tok-p">(</span> <span class="tok-n">saida</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-n">fim</span><span class="tok-p">);</span>
+    <span class="tok-kt">float</span> <span class="tok-n">gama</span> <span class="tok-o">=</span> <span class="tok-n">atoi</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">4</span><span class="tok-p">]);</span>
+    <span class="tok-n">GaussianBlur</span><span class="tok-p">(</span><span class="tok-n">saida</span><span class="tok-p">,</span><span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-n">Size</span><span class="tok-p">(</span><span class="tok-mi">7</span><span class="tok-p">,</span><span class="tok-mi">7</span><span class="tok-p">),</span><span class="tok-mi">10</span><span class="tok-p">);</span>
+    <span class="tok-n">addWeighted</span><span class="tok-p">(</span> <span class="tok-n">saida</span><span class="tok-p">,</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">blur</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alfa</span><span class="tok-p">,</span> <span class="tok-n">gama</span><span class="tok-p">,</span><span class="tok-n">fim</span><span class="tok-p">);</span>
 
     <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">foco_inicio_slider</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">foco_fim_slider</span><span class="tok-p">);</span>
 
@@ -1957,16 +1958,19 @@ Your browser does not support the video tag.
 </div>
 </div>
 <div class="paragraph">
-<p>São passados 3 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo e o terceiro é o alfa que será passado para função gaussiana.</p>
+<p>São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.</p>
 </div>
-<div class="paragraph">
-<p>A imagem original é a mesma do anterior e a saida segue abaixo.</p>
+<div class="imageblock">
+<div class="content">
+<img src="PDI/texto4.jpg" alt="texto4.jpg">
+</div>
+<div class="title">Figure 16. Texto original.</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="PDI/foco2.png" alt="foco2.png">
 </div>
-<div class="title">Figure 16. Saída do texto equalizado.</div>
+<div class="title">Figure 17. Saída do texto equalizado.</div>
 </div>
 </div>
 </div>
@@ -1974,7 +1978,7 @@ Your browser does not support the video tag.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-12 21:07:53 BRT
+Last updated 2018-04-13 17:04:33 BRT
 </div>
 </div>
 </body>
