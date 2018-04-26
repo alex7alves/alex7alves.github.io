@@ -589,7 +589,93 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div id="regions" class="listingblock">
 <div class="title">Listagem 1 - Exercício 2.1</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">    Programa para fazer o negativo entre dois pontos</span>
 <span class="tok-cm">    em uma imagem</span>
@@ -675,7 +761,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
         <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;Cordenada da coluna invalida</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">);</span>
         <span class="tok-n">exit</span><span class="tok-p">(</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">);</span>
     <span class="tok-p">}</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -713,7 +800,49 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 2 - Exercício 2.2</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">    Programa para mudar os quadrantes de uma imagem</span>
 
@@ -755,7 +884,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
     <span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;quadrantes.png&quot;</span><span class="tok-p">,</span><span class="tok-n">matriz</span><span class="tok-p">);</span>
     <span class="tok-n">waitKey</span><span class="tok-p">();</span>
     <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -813,7 +943,120 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 3 - Exercício 3.2</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">  Programa para contar obbjetos e os numero de buracos dentro deles</span>
 
@@ -926,7 +1169,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
             <span class="tok-p">}</span>
         <span class="tok-p">}</span>
     <span class="tok-p">}</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -959,7 +1203,46 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 4 - Exercício 4.1</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</div></td><td class="code"><span></span>
 <span class="tok-cm">/* Programa para equalizar o histograma</span>
 <span class="tok-cm">   de uma camera em tons de cinza</span>
 
@@ -998,7 +1281,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
         <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">30</span><span class="tok-p">);</span>
     <span class="tok-p">}</span>
     <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1031,7 +1315,40 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 4.1 - Equalização de imagens coloridas</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</div></td><td class="code"><span></span>
 <span class="tok-cm">/* Programa para equalizar o histograma</span>
 <span class="tok-cm">   de uma imagem colorida</span>
 
@@ -1064,7 +1381,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
     <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">);</span>
 
     <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1098,7 +1416,87 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 5 - Exercício 4.2</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">    Programa para detectar movimento</span>
 
@@ -1178,7 +1576,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
     <span class="tok-n">saida</span><span class="tok-p">.</span><span class="tok-n">release</span><span class="tok-p">();</span>
     <span class="tok-n">destroyAllWindows</span><span class="tok-p">();</span>
     <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1208,7 +1607,148 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 6 - Exercício 5</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">  Programa para adicionar o filtro do</span>
 <span class="tok-cm">  laplaciano do gaussiano</span>
@@ -1349,7 +1889,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
     <span class="tok-p">}</span>
   <span class="tok-p">}</span>
   <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1422,7 +1963,117 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <div class="listingblock">
 <div class="title">Listagem 7 - Tiltshift em imagem</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">  Programa para aplicar o efeito de tiltshift</span>
 <span class="tok-cm">  em uma imagem</span>
@@ -1532,7 +2183,8 @@ na disciplina de <a href="http://agostinhobritojr.github.io/tutoriais/pdi/">proc
 <span class="tok-kt">void</span> <span class="tok-nf">on_inicio</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
 <span class="tok-p">}</span>
 <span class="tok-kt">void</span> <span class="tok-nf">on_fim</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 </div>
@@ -1562,7 +2214,150 @@ Your browser does not support the video tag.
 <div class="listingblock">
 <div class="title">Listagem 8 - Tiltshift em video</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">  Programa para aplicar o efeito de tiltshift</span>
 <span class="tok-cm">  em um video</span>
@@ -1705,7 +2500,8 @@ Your browser does not support the video tag.
 <span class="tok-kt">void</span> <span class="tok-nf">on_inicio</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
 <span class="tok-p">}</span>
 <span class="tok-kt">void</span> <span class="tok-nf">on_fim</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1734,7 +2530,99 @@ Your browser does not support the video tag.
 <div class="listingblock">
 <div class="title">Listagem Extra 1 - Imagem em foco</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</div></td><td class="code"><span></span>
 <span class="tok-cm">/* Programa para realçar parte de uma imagem</span>
 <span class="tok-cm">   deixando o resto como plano de fundo</span>
 
@@ -1826,7 +2714,8 @@ Your browser does not support the video tag.
 <span class="tok-kt">void</span> <span class="tok-nf">on_inicio</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
 <span class="tok-p">}</span>
 <span class="tok-kt">void</span> <span class="tok-nf">on_fim</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1853,7 +2742,108 @@ Your browser does not support the video tag.
 <div class="listingblock">
 <div class="title">Listagem Extra 2 - Imagem em foco equalizada</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span></span>
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102</div></td><td class="code"><span></span>
 <span class="tok-cm">/*</span>
 <span class="tok-cm">   Programa para realçar parte de uma imagem com equalização</span>
 <span class="tok-cm">   deixando o resto como plano de fundo</span>
@@ -1954,7 +2944,8 @@ Your browser does not support the video tag.
 <span class="tok-kt">void</span> <span class="tok-nf">on_inicio</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
 <span class="tok-p">}</span>
 <span class="tok-kt">void</span> <span class="tok-nf">on_fim</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
-<span class="tok-p">}</span></code></pre>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1978,7 +2969,7 @@ Your browser does not support the video tag.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 17:04:33 BRT
+Last updated 2018-04-26 10:11:28 BRT
 </div>
 </div>
 </body>

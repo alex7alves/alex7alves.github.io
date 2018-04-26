@@ -25,7 +25,7 @@ O programa <<regions>> mostra a resolução para essa questão.
 
 [[regions,regions.cpp]]
 
-[source,cpp]
+[source,cpp,linenums]
 .Listagem 1 - Exercício 2.1
 ....
 include::PDI/regioes.cpp[]
@@ -50,7 +50,7 @@ image::PDI/negativo.png[negativo.png]
 
 Utilizando a mesma imagem( biel.png) como entrada e fazendo o que se é proposto tem-se :
 :pygments-style: emacs
-[source,cpp]
+[source,cpp,linenums]
 .Listagem 2 - Exercício 2.2
 ....
 include::PDI/quadrantes.cpp[]
@@ -83,7 +83,7 @@ image::PDI/bolhas2.png[bolhas2.png]
 Dessa maneira tem-se o código: 
 
 .Listagem 3 - Exercício 3.2
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Contar_bolhas.cpp[]
 ....
@@ -101,7 +101,7 @@ image::PDI/saidaContagem.png[saidaContagem.png]
 Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
 
 .Listagem 4 - Exercício 4.1
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Equalizar.cpp[]
 ....
@@ -125,7 +125,7 @@ image::PDI/Equalizar.png[Eqalizar.png]
 Pode-se também trabalhar com equalização de imagens coloridas, contudo, como estas são formadas a partir de combinação de 3 cores( caso do RGB) pode ocorrer uma mudança na tonalidade em relação a imagem original. Se essa mudança será positiva ou negativa, vai depender da preferência de quem a esta manipulando. A listagem 4.1 mostra o programa que calcula a equalização em imagens coloridas.
 
 .Listagem 4.1 - Equalização de imagens coloridas
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Equalizar_colorido.cpp[]
 ....
@@ -145,7 +145,7 @@ image::PDI/equalizado2.jpg[equalizado2.jpg]
 A listagem 5 apresenta o que se pede.
 
 .Listagem 5 - Exercício 4.2
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Detectar_movimento.cpp[]
 ....
@@ -162,7 +162,7 @@ Foi escolhido continuar com o modelo que se é utilizado no código dado e apena
 Na listagem 6 encontra-se a implementação.
 
 .Listagem 6 - Exercício 5
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/filtragem.cpp[]
 ....
@@ -203,7 +203,7 @@ image::PDI/tiltshift3.png[tiltshift3.png]
 E a implementação pode ser vista na istagem 7.
 
 .Listagem 7 - Tiltshift em imagem
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/tiltshiftImage.cpp[]
 ....
@@ -220,7 +220,7 @@ video::PDI/VideoCidade[VideoCidade]
 A listagem 8 mostra o programa para realizar essa tarefa.
 
 .Listagem 8 - Tiltshift em video
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/tiltshiftVideo.cpp[]
 ....
@@ -241,7 +241,7 @@ Esta sessão é uma parte livre e destina-se a abrigar programas que se relacion
 O programa descrito na listagem extra 1 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
 
 .Listagem Extra 1 - Imagem em foco
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Foco.cpp[]
 ....	
@@ -260,7 +260,7 @@ image::PDI/Foco.jpg[Foco.jpg]
 O programa descrito na listagem extra 2 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é feito a equalização do histograma e passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
 
 .Listagem Extra 2 - Imagem em foco equalizada
-[source,cpp]
+[source,cpp,linenums]
 ....
 include::PDI/Foco2.cpp[]
 ....	
