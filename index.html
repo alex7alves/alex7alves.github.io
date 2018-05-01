@@ -545,6 +545,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_exercício_6_2">Exercício 6.2</a></li>
 </ul>
 </li>
+<li><a href="#_7_fíltro_homomórico">7 Fíltro homomórico</a>
+<ul class="sectlevel2">
+<li><a href="#_exercício_7">Exercício 7</a></li>
+</ul>
+</li>
 <li><a href="#_extras">Extras</a>
 <ul class="sectlevel2">
 <li><a href="#_imagem_em_foco">Imagem em foco</a></li>
@@ -2514,6 +2519,479 @@ Your browser does not support the video tag.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_7_fíltro_homomórico">7 Fíltro homomórico</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_exercício_7">Exercício 7</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Utilizando o programa exemplos/dft.cpp como referência, implemente o filtro homomórfico para melhorar imagens com iluminação irregular. Crie uma cena mal iluminada e ajuste os parâmetros do filtro homomórfico para corrigir a iluminação da melhor forma possível. Assuma que a imagem fornecida é em tons de cinza.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A listagem 9 mostra o programa para realizar essa tarefa.</p>
+</div>
+<div class="listingblock">
+<div class="title">Listagem 9 - Filtro homomórfico</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216</div></td><td class="code"><span></span>
+<span class="tok-cm">/*</span>
+<span class="tok-cm">  Programa para executar um filtro homomorfico</span>
+<span class="tok-cm">  e reduzir efeitos prejudiciais da luminancia</span>
+<span class="tok-cm">  em uma imagem</span>
+
+<span class="tok-cm">  Autor : Alex Alves</span>
+
+<span class="tok-cm">*/</span>
+
+
+<span class="tok-cp">#include</span> <span class="tok-cpf">&lt;iostream&gt;</span><span class="tok-cp"></span>
+<span class="tok-cp">#include</span> <span class="tok-cpf">&lt;opencv2/opencv.hpp&gt;</span><span class="tok-cp"></span>
+<span class="tok-cp">#include</span> <span class="tok-cpf">&lt;opencv2/imgproc/imgproc.hpp&gt;</span><span class="tok-cp"></span>
+
+
+<span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">cv</span><span class="tok-p">;</span>
+<span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">std</span><span class="tok-p">;</span>
+
+<span class="tok-kt">void</span> <span class="tok-nf">Alocar</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-o">**</span><span class="tok-n">x</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">**</span><span class="tok-n">x2</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">setValores</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_gamma_l</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_gamma_h</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_c</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_d0</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">deslocaDFT</span><span class="tok-p">(</span><span class="tok-n">Mat</span><span class="tok-o">&amp;</span> <span class="tok-n">image</span> <span class="tok-p">);</span>
+<span class="tok-kt">void</span> <span class="tok-nf">Filtro_Homomorfico</span><span class="tok-p">(</span><span class="tok-n">Mat</span> <span class="tok-n">temp</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span>
+                       <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-n">dft_M</span><span class="tok-p">,</span><span class="tok-kt">int</span>  <span class="tok-n">dft_N</span><span class="tok-p">);</span>
+
+
+
+
+<span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argvc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">imaginaryInput</span><span class="tok-p">,</span> <span class="tok-n">complexImage</span><span class="tok-p">,</span> <span class="tok-n">multsp</span><span class="tok-p">;</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">padded</span><span class="tok-p">,</span> <span class="tok-n">filter</span><span class="tok-p">,</span> <span class="tok-n">mag</span><span class="tok-p">;</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">imagegray</span><span class="tok-p">,</span> <span class="tok-n">tmp</span><span class="tok-p">;</span>
+  <span class="tok-n">Mat_</span><span class="tok-o">&lt;</span><span class="tok-kt">float</span><span class="tok-o">&gt;</span> <span class="tok-n">realInput</span><span class="tok-p">,</span> <span class="tok-n">zeros</span><span class="tok-p">;</span>
+  <span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-n">Mat</span><span class="tok-o">&gt;</span> <span class="tok-n">planos</span><span class="tok-p">;</span>
+  <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span><span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">,</span><span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">;</span>
+
+  <span class="tok-n">image</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">],</span><span class="tok-n">CV_LOAD_IMAGE_GRAYSCALE</span><span class="tok-p">);</span>
+  <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">gh</span><span class="tok-p">);</span>
+  <span class="tok-n">Alocar</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">d0</span><span class="tok-p">);</span>
+  <span class="tok-n">setValores</span><span class="tok-p">(</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-n">gh</span><span class="tok-p">,</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-n">d0</span><span class="tok-p">);</span>
+
+  <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;original&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
+
+  <span class="tok-c1">// valores ideais dos tamanhos da imagem</span>
+  <span class="tok-c1">// para calculo da DFT</span>
+  <span class="tok-kt">int</span> <span class="tok-n">dft_M</span><span class="tok-p">,</span> <span class="tok-n">dft_N</span><span class="tok-p">;</span>
+
+  <span class="tok-c1">// identifica os tamanhos otimos para</span>
+  <span class="tok-c1">// calculo do FFT</span>
+  <span class="tok-n">dft_M</span> <span class="tok-o">=</span> <span class="tok-n">getOptimalDFTSize</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">);</span>
+  <span class="tok-n">dft_N</span> <span class="tok-o">=</span> <span class="tok-n">getOptimalDFTSize</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">);</span>
+
+  <span class="tok-c1">// realiza o padding da imagem</span>
+  <span class="tok-n">copyMakeBorder</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">padded</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span>
+                 <span class="tok-n">dft_M</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span>
+                 <span class="tok-n">dft_N</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">,</span>
+                 <span class="tok-n">BORDER_CONSTANT</span><span class="tok-p">,</span> <span class="tok-n">Scalar</span><span class="tok-o">::</span><span class="tok-n">all</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">));</span>
+
+  <span class="tok-c1">// parte imaginaria da matriz complexa (preenchida com zeros)</span>
+  <span class="tok-n">zeros</span> <span class="tok-o">=</span> <span class="tok-n">Mat_</span><span class="tok-o">&lt;</span><span class="tok-kt">float</span><span class="tok-o">&gt;::</span><span class="tok-n">zeros</span><span class="tok-p">(</span><span class="tok-n">padded</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">());</span>
+
+  <span class="tok-c1">// prepara a matriz complexa para ser preenchida</span>
+  <span class="tok-n">complexImage</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-n">padded</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">(),</span> <span class="tok-n">CV_32FC2</span><span class="tok-p">,</span> <span class="tok-n">Scalar</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">));</span>
+
+  <span class="tok-c1">// a função de transferência (filtro frequencial) deve ter o</span>
+  <span class="tok-c1">// mesmo tamanho e tipo da matriz complexa</span>
+  <span class="tok-n">filter</span> <span class="tok-o">=</span> <span class="tok-n">complexImage</span><span class="tok-p">.</span><span class="tok-n">clone</span><span class="tok-p">();</span>
+
+  <span class="tok-c1">// cria uma matriz temporária para criar as componentes real</span>
+  <span class="tok-c1">// e imaginaria do filtro ideal</span>
+  <span class="tok-n">tmp</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-n">dft_M</span><span class="tok-p">,</span> <span class="tok-n">dft_N</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">);</span>
+
+  <span class="tok-n">namedWindow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+
+
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-s">&quot;c&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-mi">100</span><span class="tok-p">,</span><span class="tok-n">on_c</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-s">&quot;d0 &quot;</span><span class="tok-p">,</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span><span class="tok-n">d0</span><span class="tok-p">,</span><span class="tok-mi">100</span><span class="tok-p">,</span><span class="tok-n">on_d0</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-s">&quot;gamma_h&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span><span class="tok-n">gh</span><span class="tok-p">,</span><span class="tok-mi">100</span><span class="tok-p">,</span><span class="tok-n">on_gamma_h</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-s">&quot;gamma_l&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-mi">100</span><span class="tok-p">,</span><span class="tok-n">on_gamma_l</span> <span class="tok-p">);</span>
+
+
+  <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">){</span>
+    <span class="tok-n">on_c</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+    <span class="tok-n">on_d0</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+    <span class="tok-n">on_gamma_h</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+    <span class="tok-n">on_gamma_l</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+
+
+    <span class="tok-c1">// realiza o padding da imagem</span>
+    <span class="tok-n">copyMakeBorder</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">padded</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span>
+                    <span class="tok-n">dft_M</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span>
+                    <span class="tok-n">dft_N</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">,</span>
+                    <span class="tok-n">BORDER_CONSTANT</span><span class="tok-p">,</span> <span class="tok-n">Scalar</span><span class="tok-o">::</span><span class="tok-n">all</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">));</span>
+
+    <span class="tok-c1">// limpa o array de matrizes que vao compor a</span>
+    <span class="tok-c1">// imagem complexa</span>
+    <span class="tok-n">planos</span><span class="tok-p">.</span><span class="tok-n">clear</span><span class="tok-p">();</span>
+    <span class="tok-c1">// cria a compoente real</span>
+    <span class="tok-n">realInput</span> <span class="tok-o">=</span> <span class="tok-n">Mat_</span><span class="tok-o">&lt;</span><span class="tok-kt">float</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">padded</span><span class="tok-p">);</span>
+    <span class="tok-c1">// insere as duas componentes no array de matrizes</span>
+    <span class="tok-n">planos</span><span class="tok-p">.</span><span class="tok-n">push_back</span><span class="tok-p">(</span><span class="tok-n">realInput</span><span class="tok-p">);</span>
+    <span class="tok-n">planos</span><span class="tok-p">.</span><span class="tok-n">push_back</span><span class="tok-p">(</span><span class="tok-n">zeros</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// combina o array de matrizes em uma unica</span>
+    <span class="tok-c1">// componente complexa</span>
+    <span class="tok-n">merge</span><span class="tok-p">(</span><span class="tok-n">planos</span><span class="tok-p">,</span> <span class="tok-n">complexImage</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// calcula o dft</span>
+    <span class="tok-n">dft</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">,</span> <span class="tok-n">complexImage</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// realiza a troca de quadrantes</span>
+    <span class="tok-n">deslocaDFT</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">);</span>
+
+    <span class="tok-n">Filtro_Homomorfico</span><span class="tok-p">(</span><span class="tok-n">tmp</span><span class="tok-p">,</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-n">gh</span><span class="tok-p">,</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-n">d0</span><span class="tok-p">,</span><span class="tok-n">dft_M</span><span class="tok-p">,</span><span class="tok-n">dft_N</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// cria a matriz com as componentes do filtro e junta</span>
+    <span class="tok-c1">// ambas em uma matriz multicanal complexa</span>
+    <span class="tok-n">Mat</span> <span class="tok-n">comps</span><span class="tok-p">[]</span><span class="tok-o">=</span> <span class="tok-p">{</span><span class="tok-n">tmp</span><span class="tok-p">,</span> <span class="tok-n">tmp</span><span class="tok-p">};</span>
+    <span class="tok-n">merge</span><span class="tok-p">(</span><span class="tok-n">comps</span><span class="tok-p">,</span> <span class="tok-mi">2</span><span class="tok-p">,</span> <span class="tok-n">filter</span><span class="tok-p">);</span>
+    <span class="tok-c1">// aplica o filtro frequencial</span>
+    <span class="tok-n">mulSpectrums</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">,</span><span class="tok-n">filter</span><span class="tok-p">,</span><span class="tok-n">complexImage</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// troca novamente os quadrantes</span>
+    <span class="tok-n">deslocaDFT</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// calcula a DFT inversa</span>
+    <span class="tok-n">idft</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">,</span> <span class="tok-n">complexImage</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// limpa o array de planos</span>
+    <span class="tok-n">planos</span><span class="tok-p">.</span><span class="tok-n">clear</span><span class="tok-p">();</span>
+
+    <span class="tok-c1">// separa as partes real e imaginaria da</span>
+    <span class="tok-c1">// imagem filtrada</span>
+    <span class="tok-n">split</span><span class="tok-p">(</span><span class="tok-n">complexImage</span><span class="tok-p">,</span> <span class="tok-n">planos</span><span class="tok-p">);</span>
+
+    <span class="tok-c1">// normaliza a parte real para exibicao</span>
+    <span class="tok-n">normalize</span><span class="tok-p">(</span><span class="tok-n">planos</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">],</span> <span class="tok-n">planos</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">],</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-n">CV_MINMAX</span><span class="tok-p">);</span>
+    <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span><span class="tok-n">planos</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]);</span>
+
+    <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">)</span><span class="tok-o">==</span> <span class="tok-mi">27</span> <span class="tok-p">)</span> <span class="tok-k">break</span><span class="tok-p">;</span> <span class="tok-c1">// esc pressed!</span>
+
+  <span class="tok-p">}</span>
+  <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kt">void</span> <span class="tok-nf">Alocar</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-o">**</span><span class="tok-n">x</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">**</span><span class="tok-n">x2</span><span class="tok-p">){</span>
+  <span class="tok-o">*</span><span class="tok-n">x</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-kt">int</span><span class="tok-p">;</span>
+  <span class="tok-o">*</span><span class="tok-n">x2</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-kt">int</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">setValores</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">){</span>
+  <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-o">=</span><span class="tok-mi">10</span><span class="tok-p">;</span>
+  <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-o">=</span><span class="tok-mi">20</span><span class="tok-p">;</span>
+  <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-o">=</span><span class="tok-mi">60</span><span class="tok-p">;</span>
+  <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-o">=</span><span class="tok-mi">70</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+
+<span class="tok-c1">// Funcoes vazias mas servem para direcionar os ponteiros</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_gamma_l</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kt">void</span> <span class="tok-nf">on_gamma_h</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_c</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">on_d0</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">deslocaDFT</span><span class="tok-p">(</span><span class="tok-n">Mat</span><span class="tok-o">&amp;</span> <span class="tok-n">image</span> <span class="tok-p">)</span>
+<span class="tok-p">{</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">tmp</span><span class="tok-p">,</span> <span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">B</span><span class="tok-p">,</span> <span class="tok-n">C</span><span class="tok-p">,</span> <span class="tok-n">D</span><span class="tok-p">;</span>
+
+  <span class="tok-c1">// se a imagem tiver tamanho impar, recorta a regiao para</span>
+  <span class="tok-c1">// evitar cópias de tamanho desigual</span>
+  <span class="tok-n">image</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">(</span><span class="tok-n">Rect</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span> <span class="tok-o">&amp;</span> <span class="tok-o">-</span><span class="tok-mi">2</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span> <span class="tok-o">&amp;</span> <span class="tok-o">-</span><span class="tok-mi">2</span><span class="tok-p">));</span>
+  <span class="tok-kt">int</span> <span class="tok-n">cx</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">;</span>
+  <span class="tok-kt">int</span> <span class="tok-n">cy</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">;</span>
+
+  <span class="tok-c1">// reorganiza os quadrantes da transformada</span>
+  <span class="tok-c1">// A B   -&gt;  D C</span>
+  <span class="tok-c1">// C D       B A</span>
+  <span class="tok-n">A</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">(</span><span class="tok-n">Rect</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">));</span>
+  <span class="tok-n">B</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">(</span><span class="tok-n">Rect</span><span class="tok-p">(</span><span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">));</span>
+  <span class="tok-n">C</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">(</span><span class="tok-n">Rect</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">,</span> <span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">));</span>
+  <span class="tok-n">D</span> <span class="tok-o">=</span> <span class="tok-n">image</span><span class="tok-p">(</span><span class="tok-n">Rect</span><span class="tok-p">(</span><span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">,</span> <span class="tok-n">cx</span><span class="tok-p">,</span> <span class="tok-n">cy</span><span class="tok-p">));</span>
+
+  <span class="tok-c1">// A &lt;-&gt; D</span>
+  <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">tmp</span><span class="tok-p">);</span>  <span class="tok-n">D</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">);</span>  <span class="tok-n">tmp</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">D</span><span class="tok-p">);</span>
+
+  <span class="tok-c1">// C &lt;-&gt; B</span>
+  <span class="tok-n">C</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">tmp</span><span class="tok-p">);</span>  <span class="tok-n">B</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">C</span><span class="tok-p">);</span>  <span class="tok-n">tmp</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">B</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+
+
+
+<span class="tok-kt">void</span> <span class="tok-nf">Filtro_Homomorfico</span><span class="tok-p">(</span><span class="tok-n">Mat</span> <span class="tok-n">temp</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-p">,</span>
+                        <span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-p">,</span><span class="tok-kt">int</span> <span class="tok-n">dft_M</span><span class="tok-p">,</span><span class="tok-kt">int</span>  <span class="tok-n">dft_N</span><span class="tok-p">)</span>
+<span class="tok-p">{</span>
+
+  <span class="tok-kt">float</span> <span class="tok-n">gl_aux</span><span class="tok-p">,</span><span class="tok-n">gh_aux</span><span class="tok-p">,</span><span class="tok-n">c_aux</span><span class="tok-p">,</span><span class="tok-n">d0_aux</span><span class="tok-p">,</span><span class="tok-n">t</span><span class="tok-p">,</span><span class="tok-n">t2</span><span class="tok-p">;</span>
+  <span class="tok-n">gl_aux</span><span class="tok-o">=</span> <span class="tok-o">*</span><span class="tok-n">gl</span><span class="tok-o">/</span><span class="tok-mi">10</span><span class="tok-p">;</span>
+  <span class="tok-n">gh_aux</span> <span class="tok-o">=</span> <span class="tok-o">*</span><span class="tok-n">gh</span><span class="tok-o">/</span><span class="tok-mi">10</span><span class="tok-p">;</span>
+  <span class="tok-n">c_aux</span> <span class="tok-o">=</span> <span class="tok-o">*</span><span class="tok-n">c</span><span class="tok-o">/</span><span class="tok-mi">10</span><span class="tok-p">;</span>
+  <span class="tok-n">d0_aux</span> <span class="tok-o">=</span> <span class="tok-o">*</span><span class="tok-n">d0</span><span class="tok-o">/</span><span class="tok-mi">10</span><span class="tok-p">;</span>
+
+  <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">temp</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&lt;</span> <span class="tok-n">temp</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+      <span class="tok-n">t</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-o">-</span><span class="tok-n">dft_M</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">)</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-o">-</span><span class="tok-n">dft_M</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">)</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-n">dft_N</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">)</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-n">dft_N</span><span class="tok-o">/</span><span class="tok-mi">2</span><span class="tok-p">);</span>
+      <span class="tok-n">t2</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-mf">1.0</span> <span class="tok-o">-</span> <span class="tok-p">(</span><span class="tok-kt">float</span><span class="tok-p">)</span><span class="tok-n">exp</span><span class="tok-p">(</span><span class="tok-o">-</span><span class="tok-p">(</span><span class="tok-n">c_aux</span><span class="tok-o">*</span><span class="tok-n">t</span><span class="tok-o">/</span><span class="tok-p">(</span><span class="tok-n">d0_aux</span><span class="tok-o">*</span><span class="tok-n">d0_aux</span><span class="tok-p">))));</span>
+      <span class="tok-n">temp</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-kt">float</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">gh_aux</span><span class="tok-o">-</span><span class="tok-n">gl_aux</span><span class="tok-p">)</span><span class="tok-o">*</span><span class="tok-n">t2</span> <span class="tok-o">+</span> <span class="tok-n">gl_aux</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span>
+
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A imagem de entrada utilizada foi</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="PDI/homomorfica.png" alt="homomorfica.png">
+</div>
+<div class="title">Figure 14. Imagem com problema de iluminação.</div>
+</div>
+<div class="paragraph">
+<p>Que gera como saída</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="PDI/SaidaHomomorfico.png" alt="SaidaHomomorfico.png">
+</div>
+<div class="title">Figure 15. Problema de iluminação corrigida</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_extras">Extras</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2725,13 +3203,13 @@ Your browser does not support the video tag.
 <div class="content">
 <img src="PDI/quadro.jpg" alt="quadro.jpg">
 </div>
-<div class="title">Figure 14. Imagem  original.</div>
+<div class="title">Figure 16. Imagem  original.</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="PDI/Foco.jpg" alt="Foco.jpg">
 </div>
-<div class="title">Figure 15. Saída do programa.</div>
+<div class="title">Figure 17. Saída do programa.</div>
 </div>
 </div>
 <div class="sect2">
@@ -2955,13 +3433,13 @@ Your browser does not support the video tag.
 <div class="content">
 <img src="PDI/texto4.jpg" alt="texto4.jpg">
 </div>
-<div class="title">Figure 16. Texto original.</div>
+<div class="title">Figure 18. Texto original.</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="PDI/foco2.png" alt="foco2.png">
 </div>
-<div class="title">Figure 17. Saída do texto equalizado.</div>
+<div class="title">Figure 19. Saída do texto equalizado.</div>
 </div>
 </div>
 </div>
@@ -2969,7 +3447,7 @@ Your browser does not support the video tag.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-26 10:11:28 BRT
+Last updated 2018-05-01 10:27:43 BRT
 </div>
 </div>
 </body>

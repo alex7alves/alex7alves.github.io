@@ -230,6 +230,30 @@ Foi usado um descarte de quadros no vídeo para deixá-lo com um modo um pouco a
 O vídeo pode ser visto https://www.dropbox.com/s/xhf52mjsx8v8tus/Resultado.avi?dl=0[clicando aqui]
 
 
+== 7 Fíltro homomórico
+
+=== Exercício 7
+* Utilizando o programa exemplos/dft.cpp como referência, implemente o filtro homomórfico para melhorar imagens com iluminação irregular. Crie uma cena mal iluminada e ajuste os parâmetros do filtro homomórfico para corrigir a iluminação da melhor forma possível. Assuma que a imagem fornecida é em tons de cinza.
+
+A listagem 9 mostra o programa para realizar essa tarefa.
+
+.Listagem 9 - Filtro homomórfico
+[source,cpp,linenums]
+....
+include::PDI/homomorfico.cpp[]
+....
+
+A imagem de entrada utilizada foi 
+
+.Imagem com problema de iluminação.
+image::PDI/homomorfica.png[homomorfica.png] 
+
+Que gera como saída 
+
+.Problema de iluminação corrigida
+image::PDI/SaidaHomomorfico.png[SaidaHomomorfico.png] 
+
+
 == Extras 
 
 Essa parte do site não está ligada a qualquer resolução de questão proposta na disciplina e não se relaciona com alguma atividade extra oriundas da disciplina. 
@@ -273,3 +297,6 @@ image::PDI/texto4.jpg[texto4.jpg]
 
 .Saída do texto equalizado.
 image::PDI/foco2.png[foco2.png]
+
+
+
