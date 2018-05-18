@@ -290,7 +290,7 @@ Para a imagem de entrada
 .Imagem original.
 image::PDI/tempo.jpg[tempo.jpg] 
 
-Foi obtido como saida
+Cuja saída é 
 
 .Imagem pontilhada.
 image::PDI/pontos.jpg[pontos.jpg] 
@@ -300,6 +300,9 @@ image::PDI/canny.jpg[canny.jpg]
 
 .Imagem final.
 image::PDI/arte.jpg[arte.jpg] 
+
+
+
 
 
 == Extras 
