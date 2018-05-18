@@ -268,12 +268,11 @@ image::PDI/SaidaHomomorfico.png[SaidaHomomorfico.png]
 
         Experimente ir aumentando os limiares do algoritmo de Canny e, para cada novo par de limiares, desenhar círculos cada vez menores nas posições encontradas. A Figura Pontilhismo aplicado à imagem Lena foi desenvolvida usando essa técnica.
 
-    Escolha uma imagem de seu gosto e aplique a técnica que você desenvolveu.
+Escolha uma imagem de seu gosto e aplique a técnica que você desenvolveu.
+Descreva no seu relatório detalhes do procedimento usado para criar sua técnica pontilhista.
 
-    Descreva no seu relatório detalhes do procedimento usado para criar sua técnica pontilhista.
 
-
-Estratégia utilizada : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de canny para detectar as bordas e apóis isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
+**Estratégia utilizada** : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de canny para detectar as bordas e após isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
 
 O programa para realizar essa tarefa pode ser visto na listagem 10.
 
@@ -285,6 +284,22 @@ O programa para realizar essa tarefa pode ser visto na listagem 10.
 include::PDI/arteCanny.cpp[]
 ....
 
+Para a imagem de entrada 
+
+
+.Imagem original.
+image::PDI/tempo.jpg[tempo.jpg] 
+
+Foi obtido como saida
+
+.Imagem pontilhada.
+image::PDI/pontos.jpg[pontos.jpg] 
+
+.Imagem após o algoritmo de Canny.
+image::PDI/canny.jpg[canny.jpg] 
+
+.Imagem final.
+image::PDI/arte.jpg[arte.jpg] 
 
 
 == Extras 
