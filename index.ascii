@@ -254,6 +254,39 @@ Que gera como saída
 image::PDI/SaidaHomomorfico.png[SaidaHomomorfico.png] 
 
 
+== 8 Canny e a arte de pontilhismo
+
+=== Exercício 8
+
+
+
+	* Utilizando os programas exemplos/canny.cpp e exemplos/pontilhismo.cpp como referência, implemente um programa cannypoints.cpp. A idéia é usar as bordas produzidas pelo algoritmo de Canny para melhorar a qualidade da imagem pontilhista gerada. A forma como a informação de borda será usada é livre. Entretanto, são apresentadas algumas sugestões de técnicas que poderiam ser utilizadas:
+
+        Desenhar pontos grandes na imagem pontilhista básica;
+
+        Usar a posição dos pixels de borda encontrados pelo algoritmo de Canny para desenhar pontos nos respectivos locais na imagem gerada.
+
+        Experimente ir aumentando os limiares do algoritmo de Canny e, para cada novo par de limiares, desenhar círculos cada vez menores nas posições encontradas. A Figura Pontilhismo aplicado à imagem Lena foi desenvolvida usando essa técnica.
+
+    Escolha uma imagem de seu gosto e aplique a técnica que você desenvolveu.
+
+    Descreva no seu relatório detalhes do procedimento usado para criar sua técnica pontilhista.
+
+
+Estratégia utilizada : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de canny para detectar as bordas e apóis isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
+
+O programa para realizar essa tarefa pode ser visto na listagem 10.
+
+
+
+.Listagem 10 - Canny com pontilhismo
+[source,cpp,linenums]
+....
+include::PDI/arteCanny.cpp[]
+....
+
+
+
 == Extras 
 
 Essa parte do site não está ligada a qualquer resolução de questão proposta na disciplina e não se relaciona com alguma atividade extra oriundas da disciplina. 
