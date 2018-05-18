@@ -303,6 +303,25 @@ image::PDI/arte.jpg[arte.jpg]
 
 
 
+== 9 Quantização vetorial com  K-means
+
+=== Exercício 9
+
+*Utilizando o programa kmeans.cpp como exemplo prepare um programa exemplo onde a execução do código se dê usando o parâmetro nRodadas=1 e inciar os centros de forma aleatória usando o parâmetro KMEANS_RANDOM_CENTERS ao invés de KMEANS_PP_CENTERS. Realize 10 rodadas diferentes do algoritmo e compare as imagens produzidas. Explique porque elas podem diferir tanto.
+
+A listagem 11 mostra o que se pede.
+
+
+.Listagem 11 - K-means
+[source,cpp,linenums]
+....
+include::PDI/Exercicio 9/kmeans.cpp[]
+....
+
+As imagens geradas foram unidas em um gif para melhor visualização.
+
+
+
 
 
 == Extras 
