@@ -272,7 +272,7 @@ Escolha uma imagem de seu gosto e aplique a técnica que você desenvolveu.
 Descreva no seu relatório detalhes do procedimento usado para criar sua técnica pontilhista.
 
 
-**Estratégia utilizada** : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de canny para detectar as bordas e após isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
+**Estratégia utilizada** : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de Canny para detectar as bordas e após isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
 
 O programa para realizar essa tarefa pode ser visto na listagem 10.
 
@@ -318,9 +318,18 @@ A listagem 11 mostra o que se pede.
 include::PDI/Exercicio 9/kmeans.cpp[]
 ....
 
-As imagens geradas foram unidas em um gif para melhor visualização.
+A imagem de origem é apresentada abaixo
+
+.Imagem original.
+image::PDI/Exercicio 9/vigiac.jpg[vigiac.jpg] 
 
 
+Pode-se notar uma certa diferença entre algumas imagens, isso ocorre pelo motivo dos centros dos clusters estarem sendo escolhidos de forma aleatória.
+
+Para uma melhor visualização, as imagens geradas foram unidas em um gif.
+
+.Gif para saída do programa.
+image::PDI/Exercicio 9/kmeans.gif[role=img-circle]
 
 
 
