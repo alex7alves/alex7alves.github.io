@@ -1,0 +1,381 @@
+﻿
+= Processamento digital de imagem
+Alex Alves  <alex7alves10@hotmail.com>
+:toc-title: Sumário
+:toclevels: 2
+:toc: left
+:source-highlighter: pygments
+:pygments-style: native
+
+Os exercícios resolvidos aqui são as respostas para as questões propostas
+na disciplina de http://agostinhobritojr.github.io/tutoriais/pdi/[processamento de imagem digital].
+
+
+
+== 2 Manipulando píxels em uma imagem
+
+=== Exercício 2.1
+* Utilizando o programa exemplos/pixels.cpp como referência, implemente  um  programa regions.cpp. Esse programa deverá solicitar ao usuário as coordenadas de dois pontos P1P1 e P2P2 localizados dentro dos limites do tamanho da imagem e exibir que lhe for fornecida. Entretanto, a região definida pelo retângulo de vértices opostos definidos pelos  pontos P1P1 e P2P2 será exibida com o negativo  da imagem na região correspondente. O efeito é ilustrado na Figura Regiões.
+
+A questão pede para implementar uma região para poder se gerar o negativo de no local na imagem. O negativo de uma imagem ( n(x,y)) pode ser compreendido como :
+
+	n(x,y)=255-f(x,y)
+
+O programa <<regions>> mostra a resolução para essa questão.
+
+[[regions,regions.cpp]]
+
+[source,cpp,linenums]
+.Listagem 1 - Exercício 2.1
+....
+include::PDI/regioes.cpp[]
+....
+
+O programa tem como entrada a imagem 
+
+.Imagem de entrada  - biel.png
+image::PDI/biel.png[biel.png]
+
+
+E resulta na saída, para os pontos (20,30) e (100,200)
+
+.Imagem de saída.
+image::PDI/negativo.png[negativo.png]
+
+
+
+=== Exercício 2.2
+
+* Utilizando o programa exemplos/pixels.cpp como referência, implemente um programa trocaregioes.cpp. Seu programa  deverá  trocar  os quadrantes em diagonal na imagem. Explore o uso da classe Mat e seus construtores para criar as regiões que serão trocadas. O efeito é ilustrado na Figura Troca de regiões.
+
+Utilizando a mesma imagem( biel.png) como entrada e fazendo o que se é proposto tem-se :
+:pygments-style: emacs
+[source,cpp,linenums]
+.Listagem 2 - Exercício 2.2
+....
+include::PDI/quadrantes.cpp[]
+....
+
+Cuja saída é mostrada a seguir.
+
+.Mudando os quadrantes da imagem.
+image::PDI/quadrantes.png[quadrantes.png]
+
+== 3 Preenchendo regiões
+
+=== Exercício 3.1
+
+* Observando-se o programa labeling.cpp como exemplo, é possível verificar que caso existam mais de 255 objetos na cena, o processo de rotulação poderá ficar comprometido. Identifique a situação em que isso ocorre e proponha uma solução para este problema.
+
+O problema de rotular até 255 objetos se deve ao fato de se trabalhar com a escala de cinza onde se pode representar a intensidade até 255 e portanto se limita a esse número. Uma possível solução para aumentar o número de objetos rotulados seria trabalhar com matrizes de cores(RGB) e assim ir rotulando objetos a partir da combinações dessas 3 variações de cores gerando assim um conjunto maior de possibilidades de números de objetos que se pode rotular. 
+
+=== Exercício 3.2
+
+* Aprimore o algoritmo de contagem apresentado para identificar regiões com ou sem buracos internos que existam na cena. Assuma que objetos com mais de um buraco podem existir. Inclua suporte no seu algoritmo para não contar bolhas que tocam as bordas da imagem. Não se pode presumir, a priori, que elas tenham buracos ou não.
+
+De início é necessário fazer um pré-processamento na imagem com a ajuda do algoritmo floodFill especialmente para se retirar os objetos que tocam as bordas. A partir de então pode-se fazer o processo de contagem de objetos e de quantos deles tem buracos. No código aqui implementado optou-se por trabalhar não só para descobrir quantos objetos tem buracos ou não, mas sim quantos objetos tem buracos e, dos objetos que tem buracos, quantos buracos há nele para se obter um nível maior de precisão na contagem. Assim pde-se identificar se tem 3 objetos com 2 buracos, 2 objetos com 4 buracos e assim por diante. Por comodidade limitou-se a contar até 1- buracos internos.
+
+Para testar a implementação é necessário uma imagem diferente da qual foi dada na questão pois a mesma deve ter mais do que um buraco dentro de um objeto. Dessa forma optou-se por usar a seguinte imagem como entrada :
+
+.Imagem das bolhas modifcada.
+image::PDI/bolhas2.png[bolhas2.png]
+
+Dessa maneira tem-se o código: 
+
+.Listagem 3 - Exercício 3.2
+[source,cpp,linenums]
+....
+include::PDI/Contar_bolhas.cpp[]
+....
+
+Que apresenta como saída :
+
+.Contagem dos objetos com buracos.
+image::PDI/saidaContagem.png[saidaContagem.png]
+
+== 4 Manipulação de histogramas
+
+=== Exercício 4.1 
+* Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa equalize.cpp. Este deverá, para cada imagem capturada, realizar a equalização do histogram antes de exibir a imagem. Teste sua implementação apontando a câmera para ambientes com iluminações variadas e observando o efeito gerado. Assuma que as imagens processadas serão em tons de cinza.
+
+Assumindo que as imagens serão convertidas para  tons de cinza e utilizando a própria função do OpenCV para calcular o histograma  tem-se :
+
+.Listagem 4 - Exercício 4.1
+[source,cpp,linenums]
+....
+include::PDI/Equalizar.cpp[]
+....
+
+
+Que produz a seguinte saída :
+
+
+.Imagem original.
+image::PDI/original.jpg[original.jpg]
+
+.Imagem equalizada.
+image::PDI/equalizado.jpg[equalizado.jpg]
+
+Uma  outra imagem com textos pode ser vista a seguir. A parte da esquerda é a imagem captada da câmera e a da direita é a imagem após realizar o histograma
+
+.Imagem de texto equalizado.
+image::PDI/Equalizar.png[Eqalizar.png]
+
+
+Pode-se também trabalhar com equalização de imagens coloridas, contudo, como estas são formadas a partir de combinação de 3 cores( caso do RGB) pode ocorrer uma mudança na tonalidade em relação a imagem original. Se essa mudança será positiva ou negativa, vai depender da preferência de quem a esta manipulando. A listagem 4.1 mostra o programa que calcula a equalização em imagens coloridas.
+
+.Listagem 4.1 - Equalização de imagens coloridas
+[source,cpp,linenums]
+....
+include::PDI/Equalizar_colorido.cpp[]
+....
+
+Onde o resultado é mostrado abaixo. 
+
+.Imagem original.
+image::PDI/img2.jpg[img2.jpg]
+
+.Imagem colorida equalizada.
+image::PDI/equalizado2.jpg[equalizado2.jpg]
+
+=== Exercício 4.2
+
+* Utilizando o programa exemplos/histogram.cpp como referência, implemente um programa motiondetector.cpp. Este deverá continuamente calcular o histograma da imagem (apenas uma componente de cor é suficiente) e compará-lo com o último histograma calculado. Quando a diferença entre estes ultrapassar um limiar pré-estabelecido, ative um alarme. Utilize uma função de comparação que julgar conveniente. 
+
+A listagem 5 apresenta o que se pede.
+
+.Listagem 5 - Exercício 4.2
+[source,cpp,linenums]
+....
+include::PDI/Detectar_movimento.cpp[]
+....
+
+Oonde o vídeo de saida do programa pode ser visto https://www.dropbox.com/s/jc3et6vcczymz14/Movimento.avi?dl=0[clicando aqui]
+
+== 5 Filtragem no domínio espacial I	
+
+=== Exercício 5
+* Utilizando o programa exemplos/filtroespacial.cpp como referência, implemente um programa laplgauss.cpp. O programa deverá acrescentar mais uma funcionalidade ao exemplo fornecido, permitindo que seja calculado o laplaciano do gaussiano das imagens capturadas. Compare o resultado desse filtro com a simples aplicação do filtro laplaciano.
+
+Foi escolhido continuar com o modelo que se é utilizado no código dado e apenas inserir uma nova mascara, que é a representação da máscara do laplaciano do gaussiano de tamanho 5x5 encontrado na literatura. 
+
+Na listagem 6 encontra-se a implementação.
+
+.Listagem 6 - Exercício 5
+[source,cpp,linenums]
+....
+include::PDI/filtragem.cpp[]
+....
+
+Cujo resultado, para o filtro laplaciano do gaussiano é :
+
+.laplaciano do gaussiano.
+image::PDI/lapgauss.png[lapgauss.png]
+
+Onde a imagem da esquerda é o filtro do laplaciano do gaussiano e a da direita é a imagem de entrada.
+
+== 6 Tiltshift
+
+=== Exercício 6.1 
+* Utilizando o programa exemplos/addweighted.cpp como referência, implemente um programa tiltshift.cpp. Três ajustes deverão ser providos na tela da interface:
+
+    ** um ajuste para regular a altura da região central que entrará em foco;
+
+    ** um ajuste para regular a força de decaimento da região borrada;
+
+    ** um ajuste para regular a posição vertical do centro da região que entrará em foco. Finalizado o programa, a imagem produzida deverá ser salva em arquivo.
+
+
+Foi escolhido implementar o código de uma forma um pouco diferente, mas fazendo o que se foi pedido, do código original disponibilizado.
+
+Na implementação a seguir passa-se 3 parametro por meio do trackbar. Um é para produzir o nível de borramento e os outrros 2 são para definir o inicio e o fim da região em foco na cena. 
+
+A imagem a seguir foi utilizada como entrada.
+
+.Imagem de cidade.
+image::PDI/cidade.jpg[cidade.jpg]  
+
+Cuja saída é 
+
+.Tiltshift.
+image::PDI/tiltshift3.png[tiltshift3.png] 
+
+E a implementação pode ser vista na istagem 7.
+
+.Listagem 7 - Tiltshift em imagem
+[source,cpp,linenums]
+....
+include::PDI/tiltshiftImage.cpp[]
+....
+
+=== Exercício 6.2
+
+* Utilizando o programa exemplos/addweighted.cpp como referência, implemente um programa tiltshiftvideo.cpp. Tal programa deverá ser capaz de processar um arquivo de vídeo, produzir o efeito de tilt-shift nos quadros presentes e escrever o resultado em outro arquivo de vídeo. A ideia é criar um efeito de miniaturização de cenas. Descarte quadros em uma taxa que julgar conveniente para evidenciar o efeito de stop motion, comum em vídeos desse tipo.
+
+O vídeo utilizado como entrada para o programa foi
+
+.Video de cidade.
+video::PDI/VideoCidade[VideoCidade] 
+
+A listagem 8 mostra o programa para realizar essa tarefa.
+
+.Listagem 8 - Tiltshift em video
+[source,cpp,linenums]
+....
+include::PDI/tiltshiftVideo.cpp[]
+....
+
+Foi usado um descarte de quadros no vídeo para deixá-lo com um modo um pouco acelerado, desta forma o tempo do vídeo se reduziu pela métade. Além disso foi usado regiões variadas de foco bem como intensidade do borramento, contudo , o trackbar não é captado no vídeo e por isso não á para visualizar as modifcações feitas nele mas  da para percebber os efeito que ele causa no vídeo ao modificá-lo. Dessa forma tem-se como resultado o vídeo a seguir.
+
+O vídeo pode ser visto https://www.dropbox.com/s/xhf52mjsx8v8tus/Resultado.avi?dl=0[clicando aqui]
+
+
+== 7 Fíltro homomórico
+
+=== Exercício 7
+* Utilizando o programa exemplos/dft.cpp como referência, implemente o filtro homomórfico para melhorar imagens com iluminação irregular. Crie uma cena mal iluminada e ajuste os parâmetros do filtro homomórfico para corrigir a iluminação da melhor forma possível. Assuma que a imagem fornecida é em tons de cinza.
+
+A listagem 9 mostra o programa para realizar essa tarefa.
+
+.Listagem 9 - Filtro homomórfico
+[source,cpp,linenums]
+....
+include::PDI/homomorfico.cpp[]
+....
+
+A imagem de entrada utilizada foi 
+
+.Imagem com problema de iluminação.
+image::PDI/homomorfica.png[homomorfica.png] 
+
+Que gera como saída 
+
+.Problema de iluminação corrigida
+image::PDI/SaidaHomomorfico.png[SaidaHomomorfico.png] 
+
+
+== 8 Canny e a arte de pontilhismo
+
+=== Exercício 8
+
+
+
+	* Utilizando os programas exemplos/canny.cpp e exemplos/pontilhismo.cpp como referência, implemente um programa cannypoints.cpp. A idéia é usar as bordas produzidas pelo algoritmo de Canny para melhorar a qualidade da imagem pontilhista gerada. A forma como a informação de borda será usada é livre. Entretanto, são apresentadas algumas sugestões de técnicas que poderiam ser utilizadas:
+
+        Desenhar pontos grandes na imagem pontilhista básica;
+
+        Usar a posição dos pixels de borda encontrados pelo algoritmo de Canny para desenhar pontos nos respectivos locais na imagem gerada.
+
+        Experimente ir aumentando os limiares do algoritmo de Canny e, para cada novo par de limiares, desenhar círculos cada vez menores nas posições encontradas. A Figura Pontilhismo aplicado à imagem Lena foi desenvolvida usando essa técnica.
+
+Escolha uma imagem de seu gosto e aplique a técnica que você desenvolveu.
+Descreva no seu relatório detalhes do procedimento usado para criar sua técnica pontilhista.
+
+
+**Estratégia utilizada** : Primeiramente foi feito o efeito de pontilhismo na imagem escolhida, em seguida aplicou-se o filtro de Canny para detectar as bordas e após isso pontilhou as regiões de bordas com um raio diferente na imagem anteriormente pontilhada.
+
+O programa para realizar essa tarefa pode ser visto na listagem 10.
+
+
+
+.Listagem 10 - Canny com pontilhismo
+[source,cpp,linenums]
+....
+include::PDI/arteCanny.cpp[]
+....
+
+Para a imagem de entrada 
+
+
+.Imagem original.
+image::PDI/tempo.jpg[tempo.jpg] 
+
+Cuja saída é 
+
+.Imagem pontilhada.
+image::PDI/pontos.jpg[pontos.jpg] 
+
+.Imagem após o algoritmo de Canny.
+image::PDI/canny.jpg[canny.jpg] 
+
+.Imagem final.
+image::PDI/arte.jpg[arte.jpg] 
+
+
+
+== 9 Quantização vetorial com  K-means
+
+=== Exercício 9
+
+*Utilizando o programa kmeans.cpp como exemplo prepare um programa exemplo onde a execução do código se dê usando o parâmetro nRodadas=1 e inciar os centros de forma aleatória usando o parâmetro KMEANS_RANDOM_CENTERS ao invés de KMEANS_PP_CENTERS. Realize 10 rodadas diferentes do algoritmo e compare as imagens produzidas. Explique porque elas podem diferir tanto.
+
+A listagem 11 mostra o que se pede.
+
+
+.Listagem 11 - K-means
+[source,cpp,linenums]
+....
+include::PDI/Exercicio 9/kmeans.cpp[]
+....
+
+A imagem de origem é apresentada abaixo
+
+.Imagem original.
+image::PDI/Exercicio 9/vigiac.jpg[vigiac.jpg] 
+
+
+Pode-se notar uma certa diferença entre algumas imagens, isso ocorre pelo motivo dos centros dos clusters estarem sendo escolhidos de forma aleatória.
+
+Para uma melhor visualização, as imagens geradas foram unidas em um gif.
+
+.Gif para saída do programa.
+image::PDI/Exercicio 9/kmeans.gif[role=img-circle]
+
+
+
+== Extras 
+
+Essa parte do site não está ligada a qualquer resolução de questão proposta na disciplina e não se relaciona com alguma atividade extra oriundas da disciplina. 
+
+Esta sessão é uma parte livre e destina-se a abrigar programas que se relacionam com o conteúdo visto no site. 
+
+=== Imagem em foco
+	
+O programa descrito na listagem extra 1 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
+
+.Listagem Extra 1 - Imagem em foco
+[source,cpp,linenums]
+....
+include::PDI/Foco.cpp[]
+....	
+
+São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.
+
+.Imagem  original.
+image::PDI/quadro.jpg[quadro.jpg]
+
+.Saída do programa.
+image::PDI/Foco.jpg[Foco.jpg]
+
+
+=== Imagem em foco com equalização
+	
+O programa descrito na listagem extra 2 a seguir mostra uma região de texto em destaque para dar relevância somente a ela. Nessa região é feito a equalização do histograma e passado o filtro gaussiano e adicionando a imagem original para dar uma nitidez maior.
+
+.Listagem Extra 2 - Imagem em foco equalizada
+[source,cpp,linenums]
+....
+include::PDI/Foco2.cpp[]
+....	
+
+São passados 4 parâmetros, o primeiro é a imaem, o segundo é a imagem de  fundo, o terceiro é o alfa e o quarto é o gama.
+
+.Texto original.
+image::PDI/texto4.jpg[texto4.jpg]
+
+
+.Saída do texto equalizado.
+image::PDI/foco2.png[foco2.png]
+
+
+
