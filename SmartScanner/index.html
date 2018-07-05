@@ -548,6 +548,40 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Para se realizar a extração dos textos foi feita a utilização da  Google Vision API utilizando o TextRecoginaizer que é uma  biblioteca desenvolvida pela Google para detecção de caracteres baseados em reconhecimento ótico de caracteres(OCR - Optical Character Recognition).</p>
 </div>
 <div class="paragraph">
+<p>Deeve-se sobrescrever os métodos que são usados na biblioteca para que se possa ter algum efeito além de sobrescrever os métodos do prórprio android.</p>
+</div>
+<div class="paragraph">
+<p>Para fazer com que a bilbioteca seja reconhecida para que possa ser usada deve-se fazer :</p>
+</div>
+<div class="paragraph">
+<p>Inserir no build.gradle</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mplementation 'com.google.android.gms:play-services-vision:15.0.0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>No outro gradle :</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>maven{
+    url "https://maven.google.com"
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>No AndroidManifest.xml:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;meta-data
+    android:name="com.google.android.gms.vision.DEPENDENCIES"
+    android:value="ocr" /&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>A aquitetura do projeto pode ser visualizada nas imagens 1 e 2.</p>
 </div>
 <div class="imageblock">
@@ -590,7 +624,7 @@ Your browser does not support the video tag.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-07-04 22:03:04 BRT
+Last updated 2018-07-05 10:43:22 BRT
 </div>
 </div>
 </body>

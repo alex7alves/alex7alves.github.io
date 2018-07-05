@@ -19,6 +19,29 @@ O objetivo deste trabalho é implementar um aplicativo que seja capaz de fazer a
 == Metodologia 
 Para se realizar a extração dos textos foi feita a utilização da  Google Vision API utilizando o TextRecoginaizer que é uma  biblioteca desenvolvida pela Google para detecção de caracteres baseados em reconhecimento ótico de caracteres(OCR - Optical Character Recognition).
 
+Deeve-se sobrescrever os métodos que são usados na biblioteca para que se possa ter algum efeito além de sobrescrever os métodos do prórprio android.
+
+Para fazer com que a bilbioteca seja reconhecida para que possa ser usada deve-se fazer :
+
+
+Inserir no build.gradle
+
+    mplementation 'com.google.android.gms:play-services-vision:15.0.0
+
+No outro gradle :
+
+        maven{
+            url "https://maven.google.com"
+        }
+ 
+No AndroidManifest.xml:
+    
+    <meta-data
+        android:name="com.google.android.gms.vision.DEPENDENCIES"
+        android:value="ocr" />
+
+
+
 A aquitetura do projeto pode ser visualizada nas imagens 1 e 2.
 
 .Arquitetura classes Java e XML
