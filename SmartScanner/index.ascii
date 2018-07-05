@@ -1,9 +1,41 @@
 = Aplicativo SmartScanner 
 Alex Alves  <alex7alves10@hotmail.com>
-
+:toc-title: Sumário
+:toclevels: 2
+:toc: left
 :source-highlighter: pygments
 :pygments-style: native
 
-Os exercícios resolvidos aqui são as respostas para as questões propostas
-na disciplina de http://agostinhobritojr.github.io/tutoriais/pdi/[processamento de imagem digital].
+
+
+== Introdução 
+
+A tecnologia tem como uma de suas característica o auxílio na resolução de problemas e  tendo em vista o aumento da utilização de imagens que contém textos, seja os famosos memes, cartazes, dentre outros a extração desses texto se faz cada vez mais necessário para que se possa realizar diversos atos. A utilização da tecnologia com foco na acessibilidade também é um ponto marcante.
+
+== Objetivo
+
+O objetivo deste trabalho é implementar um aplicativo que seja capaz de fazer a extração de textos e também dar uma certa acessibilidade ao usuário fazendo com que os txtos possam ser lidos.
+
+== Metodologia 
+Para se realizar a extração dos textos foi feita a utilização da  Google Vision API utilizando o TextRecoginaizer que é uma  biblioteca desenvolvida pela Google para detecção de caracteres baseados em reconhecimento ótico de caracteres(OCR - Optical Character Recognition).
+
+A aquitetura do projeto pode ser visualizada nas imagens 1 e 2.
+
+.Arquitetura classes Java e XML
+image::app/part1.png[]
+.Arquitetura XML
+image::app/part2.png[]  
+
+== Demonstração
+O vídeo 1 demonstra as funcionalidades do aplicativo.
+
+video::app/demonstrar.mp4[]  
+
+== Código
+O código desse projeto pode ser acessado através do repositório do github https://github.com/alex7alves/SmartScanner[clicando aqui].
+
+
+
+
+
 
